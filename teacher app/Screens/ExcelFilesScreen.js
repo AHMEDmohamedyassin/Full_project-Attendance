@@ -3,6 +3,8 @@ import { View, Button, Text, FlatList, Alert, TouchableOpacity } from 'react-nat
 import * as FileSystem from 'expo-file-system';
 import * as IntentLauncherAndroid from 'expo-intent-launcher';
 import {excel_folder} from '../Settings.json';
+import * as MediaLibrary from 'expo-media-library';
+import AppContainerComp from '../Components/Public/AppContainerComp'
 
 const ExcelFilesScreen = () => {
   const [files, setFiles] = useState([]);
@@ -12,17 +14,19 @@ const ExcelFilesScreen = () => {
     }, []);
 
     const readFilesInDirectory = async () => {
+        await askMediaLibraryPermission()
         try {
-            const directoryUri = FileSystem.documentDirectory + excel_folder; // or another directory path
-            const directoryInfo = await FileSystem.getInfoAsync(directoryUri);
-            
-            if (!directoryInfo.exists || !directoryInfo.isDirectory) {
-              throw new Error('Directory does not exist or is not a directory');
-            }
+          const album = await MediaLibrary.getAlbumAsync('Pictures'  + excel_folder);
+
+          const assets = await MediaLibrary.getAssetsAsync({ album: album });
+
+          setFiles(assets.assets)
           
-            const filesInDirectory = await FileSystem.readDirectoryAsync(directoryUri);
-            setFiles(filesInDirectory);
-        } catch (error) {}
+          console.log(album , assets)
+
+        } catch (error) {
+          console.log(error)
+        }
     };
 
     const openFile = async (file_name) => {
@@ -39,28 +43,43 @@ const ExcelFilesScreen = () => {
                 type: mimeType,
             });
         } catch (error) {
-            console.error('Error opening file:', error);
             Alert.alert('Error', 'Failed to open file.');
         }
     };
-
-  const renderItem = ({ item }) => {
-    return (
-        <TouchableOpacity onPress={() => openFile(item)} className="">
-            <Text>{item}</Text>
-        </TouchableOpacity>
-    );
-  };
+  
+  // ask permissions for mediaLibaray
+  async function askMediaLibraryPermission() {
+    try {
+      // Request permissions to access the media library
+      const { status } = await MediaLibrary.requestPermissionsAsync();
+  
+      if (status === 'granted') {
+        console.log('Media library permission granted');
+        return true
+        // You can now access the media library
+      } else {
+        console.log('Permission denied');
+        return false
+        // Handle permission denied case
+      }
+    } catch (error) {
+      console.error('Error asking for media library permission:', error);
+      return false
+    }
+  }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <FlatList
-        data={files}
-        renderItem={renderItem}
-        keyExtractor={(item) => item}
-        ListEmptyComponent={<Text>No files found</Text>}
-      />
-    </View>
+    <AppContainerComp>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        {
+          files.map((item , index) => (
+            <TouchableOpacity key={index} onPress={() => openFile(item)} className="">
+                <Text>{item.filename}</Text>
+            </TouchableOpacity>
+          ))
+        }
+      </View>
+    </AppContainerComp>
   );
 };
 

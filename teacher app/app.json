@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "teacher app",
-    "slug": "teacher app",
+    "slug": "attendance-teacher",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,6 +26,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d4ff519e-983c-40b3-993c-6b03b253dfe6"
+      }
+    },
+    "owner": "a_h_m_e_d_m_o_h_a_m_e_d"
   }
 }

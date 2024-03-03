@@ -45,7 +45,7 @@ const NavBar = () => {
     return (
         <>
             {
-                ["Home" ,"Info" ,"Lectures" ,"Create" ,"Details" , "QR" , "Excel"].findIndex(e => e == currentRouteName) >= 0 && !isKeyboardOpen ? (
+                ["Home" ,"Info" ,"Lectures" ,"Create" ,"Details" , "QR"].findIndex(e => e == currentRouteName) >= 0 && !isKeyboardOpen ? (
 
                     <View className="absolute bottom-4 w-full">
                         <View className="bg-slate-100 px-2 py-2  rounded flex flex-row justify-around w-3/4 mx-auto">
@@ -54,7 +54,6 @@ const NavBar = () => {
                             <QueueListIcon onPress={() => navigation.navigate('Lectures')} fill={currentRouteName == "Lectures" ? mainBlue : blurColor} size={20} />
                             <PlusIcon onPress={() => navigation.navigate('Create')} fill={currentRouteName == "Create" ? mainBlue : blurColor} size={20} />
                             <ArrowPathIcon onPress={() => navigation.navigate('Details')} fill={currentRouteName == "Details" ? mainBlue : blurColor} size={20} />
-                            <ArrowPathIcon onPress={() => navigation.navigate('Excel')} fill={currentRouteName == "Excel" ? mainBlue : blurColor} size={20} />
                         </View>
                     </View>
 

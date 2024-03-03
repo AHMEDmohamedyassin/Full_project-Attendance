@@ -25,8 +25,8 @@ const LectureDetailScreen = ({navigation}) => {
         <TouchableOpacity className="mb-4 bg-gray-100 rounded-full p-1 shadow " onPress={() => navigation.navigate('QR')}>
           <CameraIcon size={30} fill={'gray'}/>
         </TouchableOpacity>
-        {/* download button */}
-        <DownloadBtnComp/>
+        {/* download button not work*/}
+        {/* <DownloadBtnComp/> */}
       </View>
 
         <View>

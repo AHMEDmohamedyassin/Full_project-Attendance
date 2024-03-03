@@ -33,7 +33,8 @@ export default function App() {
           <Stack.Screen name="Lectures" component={LecturesScreen} />
           <Stack.Screen name="Create" component={LectureCreateScreen} />
           <Stack.Screen name="QR" component={QRcodeScreen} />
-          <Stack.Screen name="Excel" component={ExcelFilesScreen} />
+
+          {/* <Stack.Screen name="Excel" component={ExcelFilesScreen} /> */}
           
         </Stack.Navigator>
         <NavBar/>
