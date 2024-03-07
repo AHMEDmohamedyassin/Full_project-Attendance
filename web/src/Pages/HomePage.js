@@ -2,7 +2,61 @@ import React from 'react'
 
 const HomePage = () => {
   return (
-    <div className='contain'>
+    <div className='flex flex-col gap-y-20'>
+
+      
+
+      {/* usage ways  */}
+      <div className='contain flex flex-wrap justify-between'>
+          <h1 className='w-full text-xl font-bold text-gray-500 mb-10'>توفير طرق مختلفة لتسجيل الحضور : </h1>
+
+          {/* card */}
+          <div className='center flex-col gap-2 w-full'>
+            <span class="material-symbols-outlined text-[300px] text-gray-500">qr_code_scanner</span>
+            <h2 className='text-mainBlue text-lg font-bold'>استخدام الرمز</h2>
+          </div>
+
+          {/* card */}
+          <div className='center flex-col gap-2'>
+            <span class="material-symbols-outlined text-[200px] text-gray-500">photo_camera</span>
+            <h2 className='text-mainBlue text-lg font-bold'>استخدام الكاميرا</h2>
+          </div>
+
+          {/* card */}
+          <div className='center flex-col gap-2'>
+            <span class="material-symbols-outlined text-[200px] text-gray-500">keyboard_keys</span>
+            <h2 className='text-mainBlue text-lg font-bold'>إدخال يدوي</h2>
+          </div>
+      </div>
+
+
+
+      {/* border */}
+      <div className='h-[1px] w-full bg-gray-200'></div>
+
+
+      {/* how to use  */}
+      <div className='contain flex flex-wrap justify-between'>
+        <h1 className='w-full text-xl font-bold text-gray-500 mb-10'>طرية الاستخدام : </h1>
+
+        {/* card */}
+        <div className='center flex-col gap-y-4'>
+          <div className='border-gray-200 border-[1px] rounded-lg shadow-mainShadow overflow-hidden max-w-[400px] aspect-square center'>
+            <iframe width="1280" height="720" src="https://www.youtube.com/embed/2tgfQy0VHl0" title="محاضرة الرياضيات الأولي ( الجزء الثاني )" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <a href='' className='text-mainBlue text-lg font-bold'>طريقة الاستخدام للمحاضر</a>
+        </div>
+
+        {/* card */}
+        <div className='center flex-col gap-y-4'>
+          <div className='border-gray-200 border-[1px] rounded-lg shadow-mainShadow overflow-hidden max-w-[400px] aspect-square center'>
+            <iframe width="1280" height="720" src="https://www.youtube.com/embed/2tgfQy0VHl0" title="محاضرة الرياضيات الأولي ( الجزء الثاني )" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <a href='' className='text-mainBlue text-lg font-bold'>طريقة الاستخدام للطالب</a>
+        </div>
+
+      </div>
+
     </div>
   )
 }

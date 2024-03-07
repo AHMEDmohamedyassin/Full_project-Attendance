@@ -14,7 +14,7 @@ input:focus{
 
 @layer components {
     .center{
-        @apply flex justify-center items-center bg-slate-200;
+        @apply flex justify-center items-center ;
     }
 
     .contain{
@@ -32,15 +32,29 @@ input:focus{
     }
 
     .mainInput {
-      @apply border-gray-200 border-[1px] rounded shadow-sm shadow-mainShadow px-2 text-gray-700 font-semibold;
+      @apply bg-mainWhite border-gray-200 border-[1px] shadow-sm shadow-mainShadow rounded px-2 py-1;
       user-select: none;
     }
 
+    .mainListing {
+      @apply flex flex-col  gap-y-6
+    }
+
+    .mainFrom {
+      @apply grid lg:grid-cols-2 gap-4 my-10
+    }
+
+    ::selection{
+      @apply text-mainBlue bg-gray-200
+    }
   }
   
   
   /* icons  */
   .material-symbols-outlined {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
     font-variation-settings:
     'FILL' 0,
     'wght' 400,

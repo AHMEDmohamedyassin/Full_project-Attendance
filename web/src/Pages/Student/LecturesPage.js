@@ -1,5 +1,6 @@
 import React from 'react'
 import LectureCardComp from '../../Components/Lectures/LectureCardComp'
+
 const LecturesPage = () => {
   return (
     <div className='contain'>

@@ -1,13 +1,9 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import {routes} from '../../Config'
 
 const HeaderComp = () => {
   const location = useLocation();
-  const routes = [
-    {loc : '/' , title: 'الرئيسية'},
-    {loc : '/lectures' , title: 'المحاضرات'},
-    {loc : '/details' , title: 'بيانات المحاضرة'},
-  ]
 
   return (
     <div className='bg-mainWhite py-4 border-b-[1px] border-gray-200 shadow-sm'>
@@ -16,7 +12,7 @@ const HeaderComp = () => {
 
             <div className='flex gap-4 font-semibold'>
               {
-                routes.map((route , index) => (
+                routes.filter(e => e.nav || e.nav === undefined ? true : false).map((route , index) => (
                   <Link key={index} to={route.loc} className={`hover:text-mainBlue hover:underline ${location.pathname == route.loc ? 'text-mainBlue underline' : 'text-gray-700'}`}>{route.title}</Link>
                 ))
               }
