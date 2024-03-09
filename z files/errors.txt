@@ -1,0 +1,6 @@
+1 -> bad credentials
+2 -> can not update before period expiration
+3 -> not instructor
+4 -> lecture not found
+5 -> bad token
+6 -> not found
