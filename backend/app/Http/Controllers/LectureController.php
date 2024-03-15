@@ -184,7 +184,7 @@ class LectureController {
             'end' => Uuid::uuid4()
         ];
 
-        Storage::put($file_name , json_encode([$data]));
+        Storage::put($file_name , json_encode($data));
 
         return $file_name;
     }

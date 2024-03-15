@@ -4,3 +4,6 @@
 4 -> lecture not found
 5 -> bad token
 6 -> not found
+7 -> bad attendance request
+8 -> attendance expired
+9 -> error

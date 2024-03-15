@@ -15,6 +15,7 @@ class Lecture extends Model
         "qr_file" ,
         "expire_date" ,
         "student_count" ,
+        "capture_end_date" ,
     ];
 
 

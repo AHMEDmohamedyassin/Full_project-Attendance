@@ -7,10 +7,10 @@ const FooterComp = () => {
     <div className='mt-10 pt-10 bg-mainWhite border-t-mainBlue border-[1px]'>
         <div className='contain'>
             {/* upper part */}
-            <div className='grid grid-cols-2'>
+            <div className='grid lg:grid-cols-2 grid-cols-1 gap-8'>
                 {/* links part */}
                 <div>
-                    <h1 className='font-bold text-gray-700 text-lg mb-4'>روابط :</h1>
+                    <h1 className='font-bold text-gray-700 lg:text-lg mb-4'>روابط :</h1>
                     <div className='flex flex-col gap-y-4'>
                         {routes.map((e , index) => (
                             <Link className='text-gray-700 font-semibold hover:text-mainBlue' key={index} to={e.loc}>{e.title}</Link>

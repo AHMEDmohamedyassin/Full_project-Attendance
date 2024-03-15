@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('qr_file')->nullable();
             $table->dateTime('expire_date')->nullable();
-            $table->integer('student_count')->default(0);
+            $table->dateTime('capture_end_date')->nullable();
             $table->timestamps();
         });
     }

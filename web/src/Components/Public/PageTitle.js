@@ -12,7 +12,7 @@ const PageTitle = () => {
         {
             title && (title.show === undefined || title.show === true) ? (
                 <div className='contain'>
-                    <div className='font-bold text-lg text-gray-500 my-4'>{title.title} : </div>
+                    <div className='font-bold lg:text-lg text-gray-500 my-4'>{title.title} : </div>
                 </div>
             ) : null
         }

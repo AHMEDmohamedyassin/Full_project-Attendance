@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('lecture_id')->nullable()->constrained()->onDelete('cascade');
+            $table->boolean('is_mobile')->nullable();
             $table->timestamps();
         });
     }

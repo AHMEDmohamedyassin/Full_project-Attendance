@@ -6,23 +6,22 @@ const ReadQrPage = () => {
     const [data, setData] = useState('No result');
 
   return (
-    <div className='contain'>
-      <p>{data}</p>
-
-        <QrReader
+    <>
+      <QrReader
         onResult={(result, error) => {
           if (!!result) {
             setData(result?.text);
           }
 
           if (!!error) {
-            console.info('error' , error);
+            console.info(error);
+            setData('error')
           }
         }}
-        scanDelay={10000}
         style={{ width: '100%' }}
       />
-    </div>
+      <p>{data}</p>
+    </>
   )
 }
 

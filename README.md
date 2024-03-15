@@ -17,7 +17,6 @@ user_id : instructor
 title 
 expire_date : stop accepting students
 qr_file
-student_count : count of student
 
 
 collages_table : 
