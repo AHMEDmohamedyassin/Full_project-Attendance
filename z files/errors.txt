@@ -7,3 +7,4 @@
 7 -> bad attendance request
 8 -> attendance expired
 9 -> error
+10 -> email already exists

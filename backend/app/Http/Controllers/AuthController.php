@@ -47,12 +47,14 @@ class AuthController {
             $data = request()->validate([
                 'name' => 'required|max:255',
                 'phone' => 'required|regex:/^[0-9]{11}$/',
-                'email' => 'required|email|max:255|unique:users,email',
+                'email' => 'required|email|max:255',
                 'password' => 'required',
                 'password_confirmation' => 'required|same:password',
                 'collage_id' => 'required|max:8',
                 'is_student' => 'required|boolean'
             ]);
+
+            if(User::where('email' , request('email'))->first()) throw new \Exception('email already exists' , 10);
 
             // more validation for students
             if(request('is_student')){

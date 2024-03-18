@@ -15,12 +15,22 @@ import LoginPage from "./Pages/Auth/LoginPage";
 import NotFound from "./Pages/NotFound";
 import AboutUsPage from "./Pages/AboutUsPage";
 import ContactUsPage from "./Pages/ContactUsPage";
+import { NotifyContainer } from "./Components/Public/notification";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { InitiateAuth } from "./redux/action/AuthAction";
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(InitiateAuth())
+  } , [])
   return (
     <BrowserRouter>
       <div className="flex-1 w-full">
         <HeaderComp/>
+        <NotifyContainer/>
         <PageTitle/>
         <Routes>
           {/* public  */}
