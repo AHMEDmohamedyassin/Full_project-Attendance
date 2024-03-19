@@ -16,11 +16,13 @@ import NotFound from "./Pages/NotFound";
 import AboutUsPage from "./Pages/AboutUsPage";
 import ContactUsPage from "./Pages/ContactUsPage";
 import { NotifyContainer } from "./Components/Public/notification";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { InitiateAuth } from "./redux/action/AuthAction";
+import CreateLecturePage from "./Pages/Teacher/CreateLecturePage";
 
 function App() {
+  const state = useSelector(state => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -38,19 +40,40 @@ function App() {
           <Route path="/about" element={<AboutUsPage/>} />
           <Route path="/contact" element={<ContactUsPage/>} />
           <Route path="/*" element={<NotFound/>}/>
+
           {/* instructor */}
-          <Route path="/lectures/instructor" element={<LecturesPage/>} />
-          <Route path="/details" element={<DetailsPage/>} />
-          <Route path="/info/instructor" element={<InfoPage/>} />
+          {
+            state.Auth.role === 1 ? (
+              <>
+                <Route path="/lectures/instructor" element={<LecturesPage/>} />
+                <Route path="/lecture/create" element={<CreateLecturePage/>} />
+                <Route path="/details/:id" element={<DetailsPage/>} />
+                <Route path="/info/instructor" element={<InfoPage/>} />
+              </>
+            ) : null
+          }
+
           {/* student */}
-          <Route path="/lectures/student" element={<StuLecturePage/>} />
-          <Route path="/qr/read" element={<ReadQrPage/>} />
-          <Route path="/info/student" element={<StudentInfoPage/>} />
+          {
+            state.Auth.role === 2 ? (
+              <>
+                <Route path="/lectures/student" element={<StuLecturePage/>} />
+                <Route path="/qr/read" element={<ReadQrPage/>} />
+                <Route path="/info/student" element={<StudentInfoPage/>} />
+              </>
+            ) : null
+          }
+
           {/* auth */}
-          <Route path="/auth/register/instructor" element={<InstructorRegisterPage/>} />
-          <Route path="/auth/register/student" element={<StudentRegisterPage/>} />
-          <Route path="/auth/login" element={<LoginPage/>} />
-          <Route path="/auth/forgetpassword" element={<StudentInfoPage/>} />
+          {
+            !state.Auth.token ? (
+              <>
+                <Route path="/auth/register/instructor" element={<InstructorRegisterPage/>} />
+                <Route path="/auth/register/student" element={<StudentRegisterPage/>} />
+                <Route path="/auth/login" element={<LoginPage/>} />
+              </>
+            ) : null
+          }
         </Routes>
       </div>
       <FooterComp/>

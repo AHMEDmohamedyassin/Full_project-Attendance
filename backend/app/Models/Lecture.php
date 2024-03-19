@@ -24,6 +24,6 @@ class Lecture extends Model
     }
 
     public function attendance () {
-        return $this->belongsToMany(User::class , 'attendances' , 'lecture_id' , 'user_id');
+        return $this->belongsToMany(User::class , 'attendances' , 'lecture_id' , 'user_id')->withTimestamps();
     }
 }

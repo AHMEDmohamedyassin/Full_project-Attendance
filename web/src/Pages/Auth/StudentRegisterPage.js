@@ -1,14 +1,14 @@
 import React from 'react'
 import InputComp from '../../Components/Form/InputComp'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RegisterAuth } from '../../redux/action/AuthAction'
 import { SmallLoaderComp } from '../../Components/Public/LoaderComp'
-import { notify } from '../../Components/Public/notification'
 
 const StudentRegisterPage = () => {
     const state = useSelector(state => state.Auth)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const submitHandle = (e) => {
         e.preventDefault()
@@ -22,6 +22,8 @@ const StudentRegisterPage = () => {
         }
 
         dispatch(RegisterAuth(obj))
+
+        navigate('/')
     }
 
     return (

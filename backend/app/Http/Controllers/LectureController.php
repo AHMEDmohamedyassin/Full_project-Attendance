@@ -148,7 +148,7 @@ class LectureController {
     public function SearchLecture () {
         try{
             request()->validate([
-                'title' => 'required' ,
+                'title' => 'max:255' ,
                 'token' => 'required',
                 'page' => 'integer'
             ]);
@@ -159,7 +159,7 @@ class LectureController {
 
             $lecture = $user->lecture()->where('title' , 'LIKE' , '%'.request('title').'%')->orderBy("created_at" , "Desc");
 
-            return $this->SuccessResponse($this->paginate($lecture));
+            return $this->SuccessResponse($this->paginate($lecture , request('page')));
         }catch(\Exception $e){
             return $this->ErrorResponse(2003 , $e->getCode() , $e->getMessage());
         }
