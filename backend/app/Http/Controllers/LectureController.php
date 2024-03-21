@@ -101,6 +101,9 @@ class LectureController {
             $lecture = $user->lecture()->find(request('id'));
 
             if(!$lecture) throw new \Exception('not found' , 6);
+
+            if(Storage::fileExists($lecture->qr_file))
+                $lecture->qr_ids = Storage::get($lecture->qr_file);
             
             return $this->SuccessResponse($lecture);
         }catch(\Exception $e){

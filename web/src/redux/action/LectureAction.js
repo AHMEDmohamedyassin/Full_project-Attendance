@@ -1,6 +1,6 @@
 import {store} from '../store'
 import {fetching} from '../fetch'
-import { AttendanceLecture_Url, CreateLecture_URL, ReadLecture_Url, SearchLecture_Url } from '../Url'
+import { AttendanceLecture_Url, AttendanceSubmit_Url, CreateLecture_URL, DeleteLecture_Url, ReadLecture_Url, SearchLecture_Url } from '../Url'
 import { notify } from '../../Components/Public/notification'
 
 /**
@@ -71,11 +71,15 @@ export const ReadLecture = (id) => {
 
         if(!req.success || !attendance_req.success) return store.dispatch({type:"Lecture_Status" , data : "rf"})
 
+        let res = req.res
+        if(res.qr_ids)
+            res.qr_ids = JSON.parse(res.qr_ids)
+
         dispatch({
             type:"Lecture_Data" ,
             data : {
                 status : 'n' ,
-                lecture_data : req.res ,
+                lecture_data : res ,
                 attendance : attendance_req.res
             }
         })
@@ -105,6 +109,56 @@ export const AttendanceLecture = (obj) => {
             type:"Lecture_Attendance" ,
             data ,
             items
+        })
+    }
+}
+
+
+/**
+ * submit attendance
+ */
+export const SubmitAttendanceLecture = (obj) => {
+    return async dispatch => {
+        dispatch({type:"Lecture_Status" , data : "ml"})
+        const token = store.getState().Auth.token
+
+        const req = await fetching(AttendanceSubmit_Url , {...obj , token})
+        
+        dispatch({type:"Lecture_Status" , data : "n"})
+        
+        if(!req.success || !req.res.attached_ids_count) return notify('لم يتم تسجيل الطلاب') 
+
+        notify(`تم تسجيل عدد ${req.res.attached_ids_count} طلاب`)
+    }
+}
+
+
+/**
+ * delete lecture
+ */
+export const DeleteLecture = (obj) => {
+    return async dispatch => {
+        dispatch({type:"Lecture_Status" , data : "dl"})
+        const token = store.getState().Auth.token
+        let items = store.getState().Lecture.items
+        
+        const req = await fetching(DeleteLecture_Url , {...obj , token})
+        
+        dispatch({type:"Lecture_Status" , data : "n"})
+        
+        if(!req.success) return notify('لم يتم حذف المحاضرة')
+
+        notify('تم حذف المحاضرة')
+
+        console.log(items)
+        items = items.filter(e => e.id != obj.lecture_id)
+        console.log(items)
+
+        dispatch({
+            type:"Lecture_Data" ,
+            data : {
+                items 
+            }
         })
     }
 }

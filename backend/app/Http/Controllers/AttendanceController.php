@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lecture;
+use App\Models\User;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,7 @@ class AttendanceController {
      */
     public function ManualAttendance(){
         try{
-            $data = request()->validate([
+            request()->validate([
                 'token' => "required" ,
                 'id' => 'required',              // lecture id
                 'users_id' => 'required|array'   // array of student ids
@@ -34,7 +35,17 @@ class AttendanceController {
             if(!$lec) throw new \Exception('lecture not found' , 4);
 
             // attach users to lecture
-            $lec->attendance()->attach(request('users_id'));
+            $attached_ids = [];
+            for($i = 0 ; $i<count(request('users_id')) ; $i ++){
+                $id = request('users_id')[$i];
+                if(!User::find($id)) continue;
+                $lec->attendance()->attach($id);
+                $attached_ids[] = $id;
+            }
+            $data = [];
+            $data['attached_ids'] = $attached_ids;
+            $data['attached_ids_count'] = count($attached_ids);
+            $data['not_attached_ids'] = array_diff(request('users_id') , $attached_ids);
 
             return $this->SuccessResponse($data);
         }catch(\Exception $e) {
