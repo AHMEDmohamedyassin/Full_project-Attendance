@@ -20,6 +20,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { InitiateAuth } from "./redux/action/AuthAction";
 import CreateLecturePage from "./Pages/Teacher/CreateLecturePage";
+import ForgetPasswordPage from "./Pages/Auth/ForgetPasswordPage";
+import ResetPasswordPage from "./Pages/Auth/ResetPasswordPage";
 
 function App() {
   const state = useSelector(state => state)
@@ -40,6 +42,7 @@ function App() {
           <Route path="/about" element={<AboutUsPage/>} />
           <Route path="/contact" element={<ContactUsPage/>} />
           <Route path="/*" element={<NotFound/>}/>
+          <Route path="/qr" element={<ReadQrPage/>} />
 
           {/* instructor */}
           {
@@ -71,6 +74,8 @@ function App() {
                 <Route path="/auth/register/instructor" element={<InstructorRegisterPage/>} />
                 <Route path="/auth/register/student" element={<StudentRegisterPage/>} />
                 <Route path="/auth/login" element={<LoginPage/>} />
+                <Route path="/auth/forgetpassword" element={<ForgetPasswordPage/>} />
+                <Route path="/auth/resetpassword" element={<ResetPasswordPage/>} />
               </>
             ) : null
           }

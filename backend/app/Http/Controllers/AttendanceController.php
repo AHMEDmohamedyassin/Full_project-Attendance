@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Lecture;
 use App\Models\User;
+use App\Traits\PaginateTrait;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
-use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class AttendanceController {
-    use ResponseTrait;
+    use ResponseTrait , PaginateTrait;
 
     /**
      * Manual Attendancef 
@@ -103,7 +103,7 @@ class AttendanceController {
 
             return $this->SuccessResponse();
         }catch(\Exception $e) {
-            return $this->ErrorResponse(4001 , $e->getCode() , $e->getMessage());
+            return $this->ErrorResponse(4002 , $e->getCode() , $e->getMessage());
         }
     }
 
@@ -150,4 +150,56 @@ class AttendanceController {
             return $this->SuccessResponse(); 
         }else throw new \Exception('bad attendance request' , 7);
     }    
+
+
+
+    /**
+     * update expire date of qrcode 
+     */
+    public function QRActivateAttendance () {
+        try{
+            request()->validate([
+                'token' => 'required' ,
+                'id' => 'required'               // lecture id
+            ]);
+
+            $user = auth()->setToken(request('token'))->user();
+            if(!$user) throw new \Exception('bad token' , 5);
+
+            $lecture = $user->lecture()->find(request('id'));
+            if(!$lecture) throw new \Exception('not found' , 6);
+
+            $lecture->update([
+                'capture_end_date' => Carbon::now()
+            ]);
+
+            return $this->SuccessResponse();
+        }catch(\Exception $e) {
+            return $this->ErrorResponse(4003 , $e->getCode() , $e->getMessage());
+        }
+    }
+
+
+    /**
+     * get student attendances
+     * required student token
+     */
+    public function StudentAttendance() {
+        try{
+            request()->validate([
+                'token' => 'required' ,
+                'page' => 'integer'
+            ]);
+
+            $user = auth()->setToken(request('token'))->user();
+
+            if(!$user) throw new \Exception('bad token'  , 5);
+
+            $attendance = $user->attendance()->orderBy('id' , 'Desc');
+
+            return $this->SuccessResponse($this->paginate($attendance , request('page')));
+        }catch(\Exception $e){
+            return $this->ErrorResponse(4004 , $e->getCode() , $e->getMessage());
+        }
+    }
 }

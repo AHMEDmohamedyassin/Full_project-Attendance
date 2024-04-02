@@ -1,10 +1,13 @@
 import React , {useEffect, useState} from 'react'
-import LectureQrcodeComp from '../../Components/Public/LectureQrcodeComp'
+import LectureQrcodeComp from '../../Components/Lectures/LectureQrcodeComp'
 import StudentCardComp from '../../Components/Lectures/StudentCardComp'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AttendanceLecture, DeleteLecture, ReadLecture, SubmitAttendanceLecture } from '../../redux/action/LectureAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { LargeLoaderComp, SmallLoaderComp } from '../../Components/Public/LoaderComp';
+import CaptureCameraComp from '../../Components/Lectures/CaptureCameraComp';
+import { notify } from '../../Components/Public/notification';
+import ExcelSheetComp from '../../Components/Lectures/ExcelSheetComp';
 
 const DetailsPage = () => {
     const location = useLocation()
@@ -32,6 +35,12 @@ const DetailsPage = () => {
             id : lect_id
         }))
     }
+
+    // showing error if student not submitted
+    useEffect(() => {
+        if(state.status == 'mf' || state.status == 'ms')
+            dispatch({type:"Lecture_Status" , data : "n"})
+    } , [state.status])
 
     // delete lecture 
     const deleteLecture = () => {
@@ -63,7 +72,7 @@ const DetailsPage = () => {
         {/* qrcode part */}
         <div className='flex justify-center items-center flex-wrap gap-4'>
             <LectureQrcodeComp/>
-            <span className="material-symbols-outlined text-5xl text-gray-500 font-bold fill button">photo_camera</span>
+            <CaptureCameraComp />
         </div>
 
         {/* manual form part  */}
@@ -79,6 +88,8 @@ const DetailsPage = () => {
                 )
             }
         </form>
+
+        <ExcelSheetComp/>
 
         {/* recorded students  */}
         <div className='font-bold text-lg text-gray-500 mt-12 border-t-[1px] border-gray-300 py-6'>الطلاب المسجلين : {state.attendance?.total}</div>

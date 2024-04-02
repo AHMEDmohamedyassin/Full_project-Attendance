@@ -8,3 +8,4 @@
 8 -> attendance expired
 9 -> error
 10 -> email already exists
+11 -> email not found

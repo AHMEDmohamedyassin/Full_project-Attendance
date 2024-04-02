@@ -11,6 +11,8 @@ Route::post('/auth/register' , [AuthController::class , 'RegisterAuth']);
 Route::post('/auth/logout' , [AuthController::class , 'LogoutAuth']);
 Route::post('/auth/update' , [AuthController::class , 'UpdateAuth']);
 Route::post('/auth/getdata' , [AuthController::class , 'GetUserDataAuth']);
+Route::post('/auth/forgetpassword' , [AuthController::class , 'password_reset']);
+Route::post('/auth/passwordreset' , [AuthController::class , 'password_reset_save']);
 
 
 Route::post('/lecture/create' , [LectureController::class , 'CreateLecture']);
@@ -21,8 +23,10 @@ Route::post('/lecture/search' , [LectureController::class , 'SearchLecture']);
 
 Route::post('/attendance/manual' , [AttendanceController::class , 'ManualAttendance']);
 Route::post('/attendance/auto' , [AttendanceController::class , 'AutoAttendance']);
+Route::post('/attendance/Qr' , [AttendanceController::class , 'QRActivateAttendance']);
+Route::post('/attendance/student' , [AttendanceController::class , 'StudentAttendance']);
 
-Route::get('/collage/read' , [CollageController::class , 'ReadCollage']);
+Route::post('/collage/read' , [CollageController::class , 'ReadCollage']);
 Route::post('/collage/create' , [CollageController::class , 'CreateCollage']);
 Route::post('/collage/update' , [CollageController::class , 'UpdateCollage']);
 Route::post('/collage/delete' , [CollageController::class , 'DeleteCollage']);

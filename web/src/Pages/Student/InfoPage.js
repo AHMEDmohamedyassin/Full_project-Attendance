@@ -1,29 +1,65 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import QrcodeComp from '../../Components/Public/QrcodeComp'
 import InputComp from '../../Components/Form/InputComp'
+import { useDispatch, useSelector } from 'react-redux'
+import SearchBarComp from '../../Components/Public/SearchBarComp'
+import { UpdateAuth } from '../../redux/action/AuthAction'
+import { SmallLoaderComp } from '../../Components/Public/LoaderComp'
 
 const InfoPage = () => {
+  const state = useSelector(state => state.Auth)
+  const dispatch = useDispatch()
+  const [val , setVal ] = useState({})
+  const submitHandle = (e) => {
+    e.preventDefault()
+    const form = new FormData(e.target)
+    
+    let obj = {
+      is_student : true 
+    }
+
+    if(form.get('search'))
+      obj['collage_id'] = form.get('search')
+
+    for(const key of form.entries()){
+      obj[key[0]] = key[1]
+    }
+
+    dispatch(UpdateAuth(obj))
+  }
+
+  // initiat collage value
+  useEffect(() => {
+    if(state?.collage?.ar_name){
+      setVal({
+        title : state.collage.ar_name ,
+        id : state.collage.id
+      })
+    }
+  } , [state])
   return (
-    <div className='contain'>
+    <form onSubmit={submitHandle} className='contain'>
         <QrcodeComp/>
 
         <div className='mainFrom'>
-            <InputComp value={'value'} title={'الاسم'}/>
-            <InputComp value={'value'} title={'رقم الهاتف'}/>
-            <InputComp value={'value'} title={'الكلية'}/>
-            <InputComp value={'value'} title={'الفصل'}/>
-            <InputComp value={'value'} title={'الرقم'}/>
-            <InputComp value={'value'} title={'الكود'}/>
-            <InputComp value={'value'} title={'البريد الإليكتروني'}/>
-            <InputComp value={'value'} title={'كلمة الرور'}/>
-            <InputComp value={'value'} title={'تأكيد كلمة المرور'}/>
+            <InputComp value={state.name} name={'name'} title={'الاسم'}/>
+            <InputComp value={state.phone} name={'phone'} title={'رقم الهاتف'}/>
+            <InputComp value={state.sec} name={'sec'} title={'الفصل'}/>
+            <InputComp value={state.bn} name={'bn'} title={'الرقم'}/>
+            <InputComp value={state.code} name={'code'} title={'الكود'}/>
+            <InputComp value={state.group} name={'group'} title={'المجموعة'}/>
+            <SearchBarComp value={val}/>
         </div>
         
         <div className='w-full center'>
-            <button className='mainButton'>تأكيد</button>
+            {
+              state.status == 'ul' ? 
+                <SmallLoaderComp/>
+                : <button className='mainButton'>تأكيد</button>
+            }
         </div>
 
-    </div>
+    </form>
   )
 }
 

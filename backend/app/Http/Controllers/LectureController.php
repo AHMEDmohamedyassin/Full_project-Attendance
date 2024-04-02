@@ -120,7 +120,8 @@ class LectureController {
             request()->validate([
                 'id' => 'integer|required' ,
                 'token' => 'required',
-                'page' => 'integer'
+                'page' => 'integer',
+                'perpage' => 'integer'
             ]);
 
             
@@ -138,7 +139,7 @@ class LectureController {
                 return $this->SuccessResponse($attendance->get());
             }
 
-            return $this->SuccessResponse($this->paginate($attendance , request('page')));
+            return $this->SuccessResponse($this->paginate($attendance , request('page') , perPage:request('perpage')));
         }catch(\Exception $e){
             return $this->ErrorResponse(2003 , $e->getCode() , $e->getMessage());
         }

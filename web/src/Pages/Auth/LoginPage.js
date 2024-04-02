@@ -38,6 +38,7 @@ const LoginPage = () => {
                     state.status == 'll' ? <SmallLoaderComp/> : 
                         <button className='mainButton'>تسجيل الدخول</button>
                 }
+                <Link className='button text-gray-500' to={'/auth/forgetpassword'}>نسيت كلمة المرور؟</Link>
                 <Link className='button text-gray-500' to={'/auth/register/student'}>إنشاء حساب طالب ؟</Link>
                 <Link className='button text-gray-500' to={'/auth/register/instructor'}>إنشاء حساب محاضر ؟</Link>
             </div>

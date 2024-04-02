@@ -1,7 +1,8 @@
 import {store} from '../store'
 import {fetching} from '../fetch'
-import { AttendanceLecture_Url, AttendanceSubmit_Url, CreateLecture_URL, DeleteLecture_Url, ReadLecture_Url, SearchLecture_Url } from '../Url'
+import { AttendanceLecture_Url, AttendanceSubmit_Url, CreateLecture_URL, DeleteLecture_Url, QRActivateLecture_Url, ReadLecture_Url, SearchLecture_Url } from '../Url'
 import { notify } from '../../Components/Public/notification'
+import * as XLSX from 'xlsx';
 
 /**
  * create lecture
@@ -18,6 +19,8 @@ export const CreateLecture = (obj) => {
         if(!req.success) return store.dispatch({type:"Lecture_Status" , data : "n"})
 
         notify('تم إنشاء المحاضرة')
+
+        dispatch(ListLecture({page:1}))
     }
 }
 
@@ -40,7 +43,7 @@ export const ListLecture = (obj) => {
         let items = data.items
         delete data.items
 
-        if(obj.page ==1){
+        if(!obj.page || obj.page ==1){
             return dispatch({
                 type:"Lecture_Data",
                 data : {
@@ -101,6 +104,17 @@ export const AttendanceLecture = (obj) => {
 
         if(!req.success) return 
 
+        if(!obj.page || obj.page == 1){
+            dispatch({
+                type:"Lecture_Data" ,
+                data : {
+                    status : 'n' ,
+                    attendance : req.res
+                }
+            })
+            return 
+        }
+
         let data = req.res
         let items = data.items
         delete data.items
@@ -124,11 +138,19 @@ export const SubmitAttendanceLecture = (obj) => {
 
         const req = await fetching(AttendanceSubmit_Url , {...obj , token})
         
-        dispatch({type:"Lecture_Status" , data : "n"})
         
-        if(!req.success || !req.res.attached_ids_count) return notify('لم يتم تسجيل الطلاب') 
+        if(!req.success || !req.res.attached_ids_count){ 
+            notify('لم يتم تسجيل الطلاب')
+            return dispatch({type:"Lecture_Status" , data : "mf"}) 
+        }
+        
+        dispatch({type:"Lecture_Status" , data : "ms"})
 
         notify(`تم تسجيل عدد ${req.res.attached_ids_count} طلاب`)
+
+        dispatch(AttendanceLecture({
+            page : 1 , id : obj.id
+        }))
     }
 }
 
@@ -160,5 +182,103 @@ export const DeleteLecture = (obj) => {
                 items 
             }
         })
+    }
+}
+
+
+/**
+ * activate qr
+ */
+export const QRActivateLecture = (id) => {
+    return async dispatch => {
+        dispatch({type:"Lecture_Status" , data : "ql"})
+        const token = store.getState().Auth.token
+
+        const req = await fetching(QRActivateLecture_Url , {token , id})
+
+        if(!req.success) return dispatch({type:"Lecture_Status" , data : "qf"})
+
+        return dispatch({type:"Lecture_Status" , data : "qs"})
+    }
+}
+
+
+/**
+ * get attendance for excelSheet 
+ */
+export const ExcelLecture = (id) => {
+    return async dispatch => {
+        store.dispatch({type:"Lecture_Status" , data : "el"})
+        const token = store.getState().Auth?.token 
+        const lecture_name = store.getState().Lecture?.lecture_data?.title 
+        
+        try{
+            let data = {}
+            let hasMore = true
+            let current = 0
+            let items = []
+            let allowable_trials = 2;
+    
+            while (hasMore ) {
+                const req = await fetching(AttendanceLecture_Url , {id , token , page:current + 1 , perpage : 10})
+        
+                if(!req.success) {
+                    // safe from infinity looping
+                    allowable_trials -= 1
+                    continue
+                } 
+        
+                data = req.res
+                items = [...items , ...data.items]
+                delete data.items
+                current = data.current
+                hasMore = data.hasMore
+        
+            }
+    
+            dispatch({
+                type:"Lecture_Data" ,
+                data : {
+                    status : 'n' ,
+                    attendance : {
+                        ...data , 
+                        items
+                    }
+                }
+            })
+    
+            // creating json for excel file
+            let ids = []
+            const filtered = items.filter(e => {
+                if(ids.includes(e.id))
+                    return false
+                ids.push(e.id)
+                return true
+            })
+            const json = filtered.map(e => {
+                let main_data = {
+                    id : e.id,
+                    name : e.name ,
+                    phone : e.phone
+                }
+    
+                if(e.json_data){
+                    const data = JSON.parse(e.json_data)
+                    main_data = {...main_data , ...data}
+                } 
+    
+                return main_data
+            })
+    
+            // creating and downloading  excel file
+            var workbook = XLSX.utils.book_new();
+            var worksheet = XLSX.utils.json_to_sheet(json);
+            XLSX.utils.book_append_sheet(workbook , worksheet , 'lecture');
+            XLSX.writeFile(workbook, `${lecture_name ?? 'lecture'}.xlsx`);
+
+            notify(`تم تحميل ملف إكسل للمحاضرة : ${lecture_name ? lecture_name : null}`)
+        }catch(e) {
+            notify('حدث مشكلة ما أثناء إعداد ملف الإكسل')
+        }
     }
 }

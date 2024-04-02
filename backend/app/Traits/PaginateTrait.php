@@ -4,8 +4,10 @@ namespace App\Traits;
 
 Trait PaginateTrait {
     
-    public function paginate($class , $page = 1){
-        $data = $class->paginate(env('PER_PAGE') , ['*'] , 'page' , $page);
+    public function paginate($class , $page = 1 , $perPage = 0){
+        if(!$perPage) $perPage = env('PER_PAGE');
+
+        $data = $class->paginate($perPage , ['*'] , 'page' , $page);
 
         $result = [
             'current' => $data->currentPage(),

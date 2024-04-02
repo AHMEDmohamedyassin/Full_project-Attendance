@@ -39,4 +39,8 @@ export const msgs = {
         'ar' : "البريد الإليكتروني موجود بالفعل" ,
         'en' : "email already exists"
     },
+    11 : {
+        'ar' : "البريد الإليكتروني غير موجود" ,
+        'en' : "email not found"
+    }
 }

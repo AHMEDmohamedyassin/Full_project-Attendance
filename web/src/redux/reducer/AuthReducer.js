@@ -1,5 +1,6 @@
 const initial = {
   status:'n',
+  collage_list : []
 }
 
 export const AuthReducer = (state = initial , action) => {
@@ -17,6 +18,12 @@ export const AuthReducer = (state = initial , action) => {
           return {
             ...state,
             ...action.data
+          }
+        
+        case 'Auth_Collage' : 
+          return {
+            ...state , 
+            collage_list : action.data
           }
 
         default:

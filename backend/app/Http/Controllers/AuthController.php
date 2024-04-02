@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Password;
+use App\Notifications\ResetPassword;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController {
     use ResponseTrait;
@@ -29,6 +32,7 @@ class AuthController {
 
             $user = auth()->user();
             $user['token'] = $token;
+            $user['collage'] = $user->collage;
 
 
             return $this->SuccessResponse($user);    
@@ -107,6 +111,8 @@ class AuthController {
             $data = request()->validate(['token' => 'required']);
 
             $user = auth()->setToken(request('token'))->user();
+            $user['collage'] = $user->collage;
+            $user['token'] = request('token');
 
             return $this->SuccessResponse($user);
         }catch(\Exception $e){
@@ -131,6 +137,8 @@ class AuthController {
             // get user form database
             $user = auth()->setToken(request('token'))->user();
 
+            if(!$user) throw new \Exception('bad token' , 5);
+
             // more validation for students
             if($user->role == 2){
                 if(Carbon::now()->diffInHours(Carbon::parse($user->updated_at)) < env('UPDATE_PERIOD'))
@@ -148,11 +156,85 @@ class AuthController {
 
             // submit update
             $user->update($data);
+            $user['collage'] = $user->collage;
+            $user['token'] = request('token');
 
             return $this->SuccessResponse($user);
         }catch(\Exception $e){
             return $this->ErrorResponse(1005 , $e->getCode() , $e->getMessage());
         }
     }
+
+
+    /**
+     * reset Password email
+     * token expiration time updated to 60 minute in @file config/auth.php : password => user => expire
+     */
+    public function password_reset(){
+        try{
+            request()->validate(['email' => 'required']);
+
+            $user = User::where('email' , request('email'))->first();
+
+            if(!$user) throw new \Exception('email not found' , 11);
+
+            $token = Password::createToken($user);
+            $user->notify(new ResetPassword($token , request('email')));
+
+            $user->password_reset_token = $token;            
+            
+            return $this->SuccessResponse();
+        }catch(\Exception $e){
+            return $this->ErrorResponse(code:1006 , msg: $e->getMessage() , msg_code:$e->getCode());
+        }
+    }
+
+
+
+    /**
+     * method that check the token and user_email and password before resetting the password
+     * method delete token after user updated
+     */
+    public function password_reset_save(){
+        try{
+            request()->validate([
+                'email' => 'required' , 
+                'token' => 'required' , 
+                'password' => 'required|max:255|confirmed|min:8' ,
+                'password_confirmation' => 'required|max:255' ,
+            ]);
+    
+            $user = Password::getUser(request()->only('email', 'password', 'password_confirmation', 'token'));
+    
+            $tokenIsValid = Password::tokenExists($user, request('token'));
+            
+            if(!$tokenIsValid) throw new \Exception('error in validation' , 7);
+    
+            $user->password = bcrypt(request()->input('password'));
+
+            $user->save();
+
+            Password::deleteToken($user);
+    
+            return $this->SuccessResponse();
+        }catch(\Exception $e){
+            return $this->ErrorResponse(code:1007 ,msg: $e->getMessage() , msg_code:$e->getCode());
+        }
+    }
+
+
+    /**
+     * method shows the form that contains password and confirm password fields
+     */
+    // public function password_reset (){
+    //     try{
+    //         $token = $_GET['token'];
+    //         $email = $_GET['email'];
+    
+    //         return view('Callback.ResetPassword' , ['email' => $email , 'token' => $token]);
+    //     }catch(\Exception $e){
+    //         return $this->ErrorResponse(code:1007 , msg:$e->getMessage() , msg_code:$e->getCode());
+    //     }
+    // }
 
 }

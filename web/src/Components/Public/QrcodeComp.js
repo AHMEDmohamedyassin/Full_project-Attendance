@@ -3,6 +3,7 @@ import QRCode from 'react-qr-code'
 import { useSelector } from 'react-redux'
 
 const QrcodeComp = () => {
+    const state = useSelector(state => state.Auth)
     const [showQr , setShowQr]= useState(false)
 
     const handleShowQr = () => {
@@ -44,13 +45,13 @@ const QrcodeComp = () => {
 
   return (
     <div className='flex justify-center'>
-        <QRCode value='ahmed' size={100} onClick={handleShowQr}/>
+        <QRCode value={state?.id?.toString()} size={100} onClick={handleShowQr}/>
         {
           showQr ? (
-            <div onClick={handleHideQr} className='fixed top-0 left-0 bg-white w-full h-full flex justify-center'>
+            <div onClick={handleHideQr} className='fixed top-0 left-0 bg-white w-full h-full center'>
                 <QRCode 
-                    value='ahmed'
-                    className='w-full h-full'
+                    value={state?.id?.toString()}
+                    className='w-full h-[95%]'
                 />
             </div>
           ) : null
