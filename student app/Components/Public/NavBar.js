@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { Keyboard, View} from 'react-native'
 import { HomeIcon, QrCodeIcon, QueueListIcon, SparklesIcon, UserIcon } from "react-native-heroicons/solid";
 import * as tailwind from '../../tailwind.config'
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
+    const Auth = useSelector(state => state.Auth)
     const navigation = useNavigation()
     
-    
     const getCurrentRouteName = () => {
-        const route = useNavigationState(state => state?.routes[state.index] ? state?.routes[state.index] : {name:'Login'});
+        const route = useNavigationState(state => state?.routes[state.index] ? state?.routes[state.index] : {name:Auth.token ? 'Home' : 'Login'});
         return route.name;
     };
 

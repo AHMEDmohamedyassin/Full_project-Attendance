@@ -1,4 +1,4 @@
-import {createStore , applyMiddleware, combineReducers , compose} from 'redux';
+import {createStore , applyMiddleware, combineReducers , compose } from 'redux';
 import {thunk} from 'redux-thunk';
 import { AuthReducer } from "./reducer/AuthReducer";
 import { StudentReducer } from './reducer/StudentReducer';
@@ -9,6 +9,10 @@ const rootReducer = combineReducers({
 })
 
 export const store = createStore(
-        rootReducer ,   
-        applyMiddleware(thunk)
-    );
+    rootReducer ,   
+    applyMiddleware(thunk)
+);
+
+store.subscribe(() => {
+    console.log('State updated:', store.getState().Auth);
+  });

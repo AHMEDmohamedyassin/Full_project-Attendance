@@ -1,7 +1,8 @@
-import { notify } from '../../Components/Public/notification'
+import { notify } from '../../Components/Public/notification';
 import { CollageSearch_Url, ForgetPassword_Url, GetAuthData_Url, Login_Url, Logout_Url, Register_Url, ResetPassword_Url, UpdateAuth_Url } from '../Url'
 import { fetching } from '../fetch'
 import {store} from '../store'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const user_data_localstorage = 'user_data_attendance'
 
@@ -11,13 +12,11 @@ const user_data_localstorage = 'user_data_attendance'
 export const RegisterAuth = (obj) => {
     return async dispatch => {
         store.dispatch({type:'Auth_Status' , data : 'rl'})
-        notify('جاري التحميل')
 
         const req =  await fetching(Register_Url , obj)
 
         if(!req.success) return store.dispatch({type:'Auth_Status' , data : 'n'})
 
-        notify('تم إنشاء الحساب')
         
         let res = req.res
         let json_data = res.json_data
@@ -31,7 +30,8 @@ export const RegisterAuth = (obj) => {
             }
         }
 
-        localStorage.setItem(user_data_localstorage , JSON.stringify(res))
+        // save data to local storage
+        await storeData(res)
 
         dispatch({
             type:"Auth_Data",
@@ -48,15 +48,16 @@ export const RegisterAuth = (obj) => {
  * initial user data 
  */
 export const InitiateAuth = () => {
-    let data = localStorage.getItem(user_data_localstorage)
+    return async dispatch => {
 
-    if(!data) return {type : "" , data:null}
+        let data = await getData()
 
-    data = JSON.parse(data)
-
-    return {
-        type:"Auth_Data",
-        data
+        if(!data) return {type : "" , data:null}
+    
+        dispatch({
+            type:"Auth_Data",
+            data
+        })
     }
 }
 
@@ -67,13 +68,11 @@ export const InitiateAuth = () => {
 export const LoginAuth = (obj) => {
     return async dispatch => {
         store.dispatch({type:"Auth_Status" , data:'ll'})
-        notify('جاري التحميل')
 
         const req = await fetching(Login_Url , obj)
 
         if(!req.success) return store.dispatch({type:"Auth_Status" , data:'n'})
 
-        notify('تم تسجيل الدخول')
         
         let res = req.res
         let json_data = res.json_data
@@ -87,7 +86,8 @@ export const LoginAuth = (obj) => {
             }
         }
 
-        localStorage.setItem(user_data_localstorage , JSON.stringify(res))
+        // storing data to local storage
+        await storeData(res)
 
         dispatch({
             type:"Auth_Data",
@@ -109,7 +109,9 @@ export const LogoutAuth = () => {
 
         const req = await fetching(Logout_Url , {token})
 
-        localStorage.removeItem(user_data_localstorage)
+        // remove data from localstorage
+        await removeValue()
+
         dispatch({
             type : "Auth_Logout"
         })
@@ -154,7 +156,7 @@ export const UpdateAuth = (obj) => {
 
         if(!req.success) return
 
-        notify('تم تعديل البيانات')
+        notify('تم تعديل البيانات '  , 'SUCCESS')
 
         dispatch(GetUserData())
     }
@@ -187,7 +189,8 @@ export function GetUserData() {
             }
         }
 
-        localStorage.setItem(user_data_localstorage , JSON.stringify(res))
+        // save data to localstorage
+        await storeData(res)
 
         dispatch({
             type:"Auth_Data",
@@ -213,7 +216,7 @@ export const ForgetPassowrdAuth = (email) => {
         
         if(req.success){
             dispatch({type:"Auth_Status" , data:'fs'})
-            notify('تم إرسال رسالة تحقق علي البريد الإليكتروني')
+            notify('تم إرسال رسالة تحقق')
         }
         else
             dispatch({type:"Auth_Status" , data:'n'})
@@ -235,5 +238,51 @@ export const ResetPasswordAuth = (obj) => {
             dispatch({type:"Auth_Status" , data:'ps'})
         else 
             dispatch({type:"Auth_Status" , data:'n'})
+    }
+}
+
+
+/**
+ ***************************************************** 
+ ***************************************************** 
+ ***************************************************** 
+ * store data to local storage 
+ * helper function
+ */
+
+async function storeData (value) {
+    const str = JSON.stringify(value)
+    try {
+      await AsyncStorage.setItem(user_data_localstorage, str);
+    } catch (e) {
+      // saving error
+    }
+};
+
+
+/**
+ * get stored data from local storage
+ */
+async function getData () {
+    try {
+      const value = await AsyncStorage.getItem(user_data_localstorage);
+      if (value !== null) {
+        return JSON.parse(value)
+      }
+      return false
+    } catch (e) {
+      return false
+    }
+};
+
+
+/**
+ * remove stored data from local storage
+ */
+async function removeValue () {
+    try {
+      await AsyncStorage.removeItem(user_data_localstorage)
+    } catch(e) {
+      // remove error
     }
 }

@@ -20,7 +20,7 @@ export const fetching = async (url , data = {} , body = null , headers = null) =
             body
         });
     
-        console.log(req)
+        console.log('the request is : ' , req)
         if(!req.ok){
             notify('حدثت مشكلة ما الرجاء المحاولة لاحقا')
             return {success : false , res : {}}
@@ -41,7 +41,8 @@ export const fetching = async (url , data = {} , body = null , headers = null) =
     
         return {success : false , res};
         
-    }catch($e){
+    }catch(e){
+        console.log('the request error is : ' , e)
         return {success : false , res:{}};
     }
 }

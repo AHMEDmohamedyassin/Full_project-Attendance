@@ -1,8 +1,10 @@
 import { useNavigationState } from '@react-navigation/native';
 import React from 'react'
 import {StatusBar, Text, View } from 'react-native'
+import { useSelector } from 'react-redux';
 
 const AppHeaderComp = () => {
+  const Auth = useSelector(state => state.Auth)
   const translate_routes = [
     {ar:"الرئيسية" , en:"Home"},
     {ar:"تسجيل الدخول" , en:"Login"},
@@ -13,7 +15,7 @@ const AppHeaderComp = () => {
     {ar:"المحاضرات المسجلة" , en:"Recorded"},
   ]
   const getCurrentRouteName = () => {
-    const route = useNavigationState(state => state?.routes[state.index] ? state?.routes[state.index] : {name:'Login'});
+    const route = useNavigationState(state => state?.routes[state.index] ? state?.routes[state.index] : {name:Auth.token ? 'Home' : 'Login'});
     const obj = translate_routes.find(e => e.en == route.name)
     return obj? obj.ar : route.name;
   };
