@@ -14,5 +14,6 @@ export const store = createStore(
 );
 
 store.subscribe(() => {
-    console.log('State updated:', store.getState().Auth);
+    console.log('State updated Auth:', store.getState().Auth);
+    console.log('State updated student:', store.getState().Stud);
   });

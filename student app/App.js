@@ -15,6 +15,7 @@ import { store } from './redux/store';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import { useEffect, useState } from 'react';
 import { InitiateAuth } from './redux/action/AuthAction';
+import { AttendanceLocallyInitiate } from './redux/action/StudentAction';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
 
   useEffect(() => {
     store.dispatch(InitiateAuth())
+    store.dispatch(AttendanceLocallyInitiate())
   } , [])
   return (
     <Provider store={store}>

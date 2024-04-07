@@ -22,7 +22,7 @@ const LoginPage = () => {
 
         dispatch(LoginAuth(obj))
         
-        navigate('/')
+        // navigate('/')
     }
 
     return (

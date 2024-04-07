@@ -1,4 +1,4 @@
-export const APP_URL = 'http://localhost:8000';
+export const APP_URL = 'http://192.168.42.191:8000';
 export const APIv = '/api'
 
 

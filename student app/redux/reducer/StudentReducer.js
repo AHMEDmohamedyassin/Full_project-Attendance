@@ -6,6 +6,7 @@ const initial = {
     perPage : 0 ,
     hasMore : true ,
     items:[],
+    stored_lectures : []
   }
 
 export const StudentReducer = (state = initial , action) => {

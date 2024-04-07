@@ -42,7 +42,6 @@ function App() {
           <Route path="/about" element={<AboutUsPage/>} />
           <Route path="/contact" element={<ContactUsPage/>} />
           <Route path="/*" element={<NotFound/>}/>
-          <Route path="/qr" element={<ReadQrPage/>} />
 
           {/* instructor */}
           {
@@ -77,7 +76,7 @@ function App() {
                 <Route path="/auth/forgetpassword" element={<ForgetPasswordPage/>} />
                 <Route path="/auth/resetpassword" element={<ResetPasswordPage/>} />
               </>
-            ) : null
+            ) : <Route path="/auth/*" element={<HomePage/>}/>
           }
         </Routes>
       </div>
