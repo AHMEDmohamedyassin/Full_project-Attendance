@@ -37,7 +37,7 @@ export const fetching = async (url , data = {} , body = null , headers = null) =
     
         notify(res.msg_code && msgs[res.msg_code]? msgs[res.msg_code]["ar"] : 'حدث خطأ ما')
     
-        console.log(res)
+        console.log('server response : ', res)
     
         return {success : false , res};
         

@@ -14,8 +14,8 @@ const StudentCardComp = ({name , json_data , pivot}) => {
             month : String(date.getMonth() + 1).padStart(2,'0') ,
             year : date.getFullYear() ,
         }
-        if(hour > 12) hour = hour - 12
         if(hour < 12) PmAm = 'AM'
+        if(hour > 12) hour = hour - 12
         setDate({hour : String(hour).padStart(2 , '0') , PmAm , ...data})
     }  , [pivot.created_at])
     

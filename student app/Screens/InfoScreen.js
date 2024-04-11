@@ -6,11 +6,13 @@ import InputComp from '../Components/Public/InputComp'
 import ButtonComp from '../Components/Public/ButtonComp'
 import QrcodeComp from '../Components/Public/QrcodeComp'
 import { useDispatch, useSelector } from 'react-redux'
-import { LogoutAuth , UpdateAuth} from '../redux/action/AuthAction'
+import { GetUserData, LogoutAuth , UpdateAuth} from '../redux/action/AuthAction'
 import {SmallLoadingComp} from '../Components/Public/LoadingComp'
+import SearchCollageComp from '../Components/Public/SearchCollageComp'
 
 const InfoScreen = () => {
   const state = useSelector(state => state.Auth)
+  const Set = useSelector(state => state.Set)
   const dispatch = useDispatch()
   const [data , setData] = useState({})
 
@@ -32,7 +34,14 @@ const InfoScreen = () => {
     }))
   }
 
-  useEffect(() => console.log(data) , [data])
+  // check if page reloaded
+  useEffect(() => {
+    if(Set.status == 'l') {
+      dispatch({type:"Setting_Reload" , data : 'n'})
+      dispatch(GetUserData())
+    }
+  } , [Set.status])
+
   return (
     <AppContainerComp>
       <View>
@@ -42,17 +51,18 @@ const InfoScreen = () => {
 
           <QrcodeComp qrcodeValue={String(state.id)} />
 
-          <Text className="font-bold text-mainBlue text-xl">{state.name}</Text>
+          <Text className="font-bold text-mainBlue text-xl"> الكود : {state.id}</Text>
         </View>
 
         {/* from  */}
         <View className="flex">
           <InputComp val={(e) => setData(old => ({...old , name : e}))} defaultVal={state.name} title={'الاسم'}/>
           <InputComp val={(e) => setData(old => ({...old , phone : e}))} defaultVal={state.phone} title={'رقم الهاتف'}/>
+          <SearchCollageComp val={(e) => setData(old => ({...old , collage_id : e}))}/>
           <InputComp val={(e) => setData(old => ({...old , sec : e}))} defaultVal={state.sec} title={'الفصل'}/>
           <InputComp val={(e) => setData(old => ({...old , bn : e}))} defaultVal={state.bn} title={'الرقم في الفصل'}/>
-          <InputComp val={(e) => setData(old => ({...old , code : e}))} defaultVal={state.code} title={'الكود'}/>
-          <InputComp val={(e) => setData(old => ({...old , group : e}))} defaultVal={state.group} title={'الكود'}/>
+          <InputComp val={(e) => setData(old => ({...old , code : e}))} defaultVal={state.code} title={'الكود الجامعي'}/>
+          <InputComp val={(e) => setData(old => ({...old , group : e}))} defaultVal={state.group} title={'المجموعة'}/>
         </View>
 
         {

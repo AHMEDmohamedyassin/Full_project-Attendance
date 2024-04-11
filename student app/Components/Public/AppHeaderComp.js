@@ -1,5 +1,5 @@
 import { useNavigationState } from '@react-navigation/native';
-import React from 'react'
+import React, { memo } from 'react'
 import {StatusBar, Text, View } from 'react-native'
 import { useSelector } from 'react-redux';
 
@@ -30,4 +30,4 @@ const AppHeaderComp = () => {
   )
 }
 
-export default AppHeaderComp
+export default memo(AppHeaderComp)

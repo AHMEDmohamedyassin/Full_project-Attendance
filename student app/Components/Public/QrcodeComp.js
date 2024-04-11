@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import QRCode from 'react-qr-code';
 
@@ -22,4 +22,4 @@ const QrcodeComp = ({qrcodeValue}) => {
   )
 }
 
-export default QrcodeComp
+export default memo(QrcodeComp)

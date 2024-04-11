@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native'
-import React from 'react'
+import React , {memo} from 'react'
+import { useNavigation} from '@react-navigation/native'
 import { TouchableOpacity, View } from 'react-native'
 import { QrCodeIcon, QueueListIcon, UserIcon } from 'react-native-heroicons/solid'
 
@@ -36,4 +36,4 @@ const SquareCardsComp = () => {
   )
 }
 
-export default SquareCardsComp
+export default memo(SquareCardsComp)

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Text, TextInput, View } from 'react-native'
 
-const InputComp = ({val , title , placeholder , defaultVal}) => {
+const InputComp = ({val , title , placeholder , defaultVal , onPress , focusable , autoFocus}) => {
   return (
     <View className="flex flex-col w-full gap-1 my-2">
         <Text className="text-xs text-gray-700">{title}</Text>
@@ -10,9 +10,12 @@ const InputComp = ({val , title , placeholder , defaultVal}) => {
           placeholder={placeholder} 
           className="bg-slate-50 border-[1px] border-gray-300 rounded w-full px-2 py-1"
           defaultValue={defaultVal}
+          onPressIn={onPress}
+          focusable={focusable}
+          autoFocus={autoFocus}
         />
     </View>
   )
 }
 
-export default InputComp
+export default memo(InputComp)

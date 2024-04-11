@@ -1,6 +1,6 @@
 import { CameraView, useCameraPermissions } from 'expo-camera/next';
-import { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import AppContainerComp from '../Components/Public/AppContainerComp';
 import { ArrowPathIcon } from 'react-native-heroicons/solid';
 import ButtonComp from '../Components/Public/ButtonComp';

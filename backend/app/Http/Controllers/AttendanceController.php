@@ -195,7 +195,8 @@ class AttendanceController {
 
             if(!$user) throw new \Exception('bad token'  , 5);
 
-            $attendance = $user->attendance()->orderBy('id' , 'Desc');
+            // $attendance = $user->attendance()->orderBy('created_at' , 'Desc');
+            $attendance = $user->attendance()->orderBy('pivot_created_at' , 'Desc');
 
             return $this->SuccessResponse($this->paginate($attendance , request('page')));
         }catch(\Exception $e){

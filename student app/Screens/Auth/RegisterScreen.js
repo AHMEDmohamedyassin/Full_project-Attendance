@@ -7,6 +7,7 @@ import ButtonComp from '../../Components/Public/ButtonComp'
 import { useDispatch, useSelector } from 'react-redux'
 import { RegisterAuth } from '../../redux/action/AuthAction'
 import { notify } from '../../Components/Public/notification'
+import SearchCollageComp from '../../Components/Public/SearchCollageComp'
 
 const RegisterScreen = ({navigation}) => {
   const state = useSelector(state => state.Auth)
@@ -28,7 +29,7 @@ const RegisterScreen = ({navigation}) => {
         
           <InputComp val={e => setData(old => ({...old , name : e}))} placeholder={'أحمد'}  title={'الاسم'} />
           <InputComp val={e => setData(old => ({...old , phone : e}))} placeholder={'01066404523'}  title={'الهاتف'} />
-          <InputComp val={e => setData(old => ({...old , collage_id : e}))} placeholder={'هندسة القاهرة'}  title={'الكلية'} />
+          <SearchCollageComp  val={e => setData(old => ({...old , collage_id : e}))} />
           <InputComp val={e => setData(old => ({...old , sec : e}))} placeholder={'2'}  title={'الفصل'} />
           <InputComp val={e => setData(old => ({...old , bn : e}))} placeholder={'4'}  title={'الرقم بالفصل'} />
           <InputComp val={e => setData(old => ({...old , code : e}))} placeholder={'9210150'}  title={'الكود'} />

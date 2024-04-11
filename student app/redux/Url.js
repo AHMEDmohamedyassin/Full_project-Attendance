@@ -1,5 +1,6 @@
 export const APP_URL = 'http://192.168.42.191:8000';
 export const APIv = '/api'
+export const APP_TOKEN = 'ahmed'
 
 
 export const Register_Url = `/auth/register`

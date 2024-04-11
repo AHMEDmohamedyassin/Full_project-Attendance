@@ -1,9 +1,8 @@
 import { notify } from '../../Components/Public/notification'
-import { AutoAttendance_Url, StudentAttendance_Url } from '../Url'
+import { AutoAttendance_Url, StudentAttendance_Url  , APP_TOKEN as app_token} from '../Url'
 import {fetching} from '../fetch'
 import { store } from '../store'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 /**
  * get student attendance
@@ -47,20 +46,39 @@ export const AttendanceStudent = (obj) => {
  */
 export const AttendanceAuto = (obj) => {
     return async dispatch =>{
-        dispatch({type : "Student_Status" , data : "cl"})
+        dispatch({type : "Student_Status" , data : `c${obj.id}l`})
         const token = store.getState().Auth?.token
+        let lectures = store.getState().Stud?.stored_lectures
 
-        const req = await fetching(AutoAttendance_Url , {token , ...obj})
+        const req = await fetching(AutoAttendance_Url , {token , app_token , ...obj})
 
-        if(!req.success){ 
-            notify('فشل تسجيل الحضور الرجاء إعادة المحاولة')
-            dispatch({type:"Student_Data"  , data : {error : JSON.stringify({token , ...obj})}})
-            return dispatch({type : "Student_Status" , data : "cf"})
+        if(!lectures || (!req.success && req?.res?.msg_code != 8)){
+            return dispatch({type : "Student_Status" , data : "n"})
         }
 
-        dispatch({type : "Student_Status" , data : "cs"})
 
-        notify('تم تسجيل الحضور')
+        // make notification if lecture recorded not expired
+        if(req.success) notify('تم تسجيل الحضور' , 'SUCCESS')
+
+        // removing the recoreded or expired lectures 
+        lectures = lectures.filter(e => e.data.id != obj.id)
+
+        // change data in localstorage
+        try{
+            await AsyncStorage.setItem('Lectures_saved', JSON.stringify(lectures));
+        }
+        catch (e){}
+
+        // dispath changes
+        dispatch({
+            type : "Student_Data" , 
+            data : {
+                status : 'n' ,
+                stored_lectures : lectures
+            }
+        })
+
+        return dispatch(AttendanceStudent())
     }
 }
 
@@ -81,7 +99,7 @@ export const AttendanceLocallySave = (obj = null) => {
                 return notify('محاضرة متكررة')
             } 
 
-            saved_lectures = [{data : obj , date : new Date()} , ...saved_lectures]
+            saved_lectures = [{data : obj , date : String(new Date())} , ...saved_lectures]
             await AsyncStorage.setItem('Lectures_saved', JSON.stringify(saved_lectures));
             
             notify('تم حفظ المحاضرة'  , 'SUCCESS')
