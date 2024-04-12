@@ -26,7 +26,11 @@ Route::post('/attendance/auto' , [AttendanceController::class , 'AutoAttendance'
 Route::post('/attendance/Qr' , [AttendanceController::class , 'QRActivateAttendance']);
 Route::post('/attendance/student' , [AttendanceController::class , 'StudentAttendance']);
 
+// collage routes
+Route::middleware(['Admin'])->group(function () {
+    Route::post('/collage/create' , [CollageController::class , 'CreateCollage']);
+    Route::post('/collage/update' , [CollageController::class , 'UpdateCollage']);
+    Route::post('/collage/delete' , [CollageController::class , 'DeleteCollage']);
+    Route::post('/collage/masscreate' , [CollageController::class , 'MassCreateCollage']);
+});
 Route::post('/collage/read' , [CollageController::class , 'ReadCollage']);
-Route::post('/collage/create' , [CollageController::class , 'CreateCollage']);
-Route::post('/collage/update' , [CollageController::class , 'UpdateCollage']);
-Route::post('/collage/delete' , [CollageController::class , 'DeleteCollage']);

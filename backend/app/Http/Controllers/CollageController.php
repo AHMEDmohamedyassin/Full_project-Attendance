@@ -108,4 +108,30 @@ class CollageController{
         }
     }
 
+    public function MassCreateCollage () {
+        try{
+            $massContent = [];
+
+            foreach(['Literary' , 'Scientific'] as $key){
+                $file_name = 'collage/'.$key.'.json';
+                $file = fopen(public_path($file_name) , 'r');
+                $content = fread($file , filesize($file_name));
+                if($content) $content = json_decode($content);
+                $massContent = array_merge($massContent , $content);
+            }
+
+            $massContent = array_values(array_unique($massContent));
+
+            for($i = 0 ; $i < count($massContent) ; $i ++){
+                Collage::create([
+                    'ar_name' => $massContent[$i]
+                ]);
+            }
+
+            return $this->SuccessResponse($massContent);
+        }catch(\Exception $e) {
+            return $this->ErrorResponse(3005 , $e->getCode() , $e->getMessage());
+        }
+    }
+
 }
