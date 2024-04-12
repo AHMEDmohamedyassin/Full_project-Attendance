@@ -29,8 +29,8 @@ const LoginPage = () => {
         <form onSubmit={submitHandle} className='contain pt-10 pb-32'>
 
             <div className='mx-auto max-w-96 flex flex-col gap-y-4 my-10'>
-                <InputComp name={'email'} title={'البريد الإليكتروني'}/>
-                <InputComp name={'password'} title={'كلمة الرور'}/>
+                <InputComp name={'email'} title={'البريد الإليكتروني'} required={true}/>
+                <InputComp name={'password'} title={'كلمة الرور'} required={true} type={'password'}/>
             </div>
             
             <div className='w-full center flex-col gap-1'>

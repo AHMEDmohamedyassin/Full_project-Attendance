@@ -36,7 +36,7 @@ class LectureController {
             $lec = Lecture::create([
                 'title' => request('title'),
                 'user_id' => $user->id,
-                'expire_date' => Carbon::now()->addHours(request('exp_hours'))
+                'expire_date' => Carbon::now()->addHours(env('EXPIRE_DATE' , 1))
             ]);
 
             // creating and storing qrcode tokens

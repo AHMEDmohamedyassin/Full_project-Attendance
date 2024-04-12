@@ -29,12 +29,12 @@ const InstructorRegisterPage = () => {
   return (
     <form onSubmit={submitHandle} className='contain pt-10 pb-48'>
         <div className='mainFrom'>
-            <InputComp name={'name'} title={'الاسم'}/>
-            <InputComp name={'phone'} title={'رقم الهاتف'}/>
-            <InputComp name={'email'} title={'البريد الإليكتروني'}/>
-            <InputComp name={'collage_id'} title={'الكلية'}/>
-            <InputComp name={'password'} title={'كلمة المرور'}/>
-            <InputComp name={'password_confirmation'} title={'تأكيد كلمة المرور'}/>
+            <InputComp required={true} name={'name'} title={'الاسم'}/>
+            <InputComp required={true} name={'phone'} title={'رقم الهاتف'}/>
+            <InputComp required={true} name={'email'} title={'البريد الإليكتروني'}/>
+            <InputComp required={true} name={'collage_id'} title={'الكلية'}/>
+            <InputComp required={true} type={'password'} name={'password'} title={'كلمة المرور'}/>
+            <InputComp required={true} type={'password'} name={'password_confirmation'} title={'تأكيد كلمة المرور'}/>
         </div>
         
         <div className='w-full center flex-col gap-1'>

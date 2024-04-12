@@ -154,7 +154,8 @@ class AttendanceController {
 
 
     /**
-     * update expire date of qrcode 
+     * update capture end date of qrcode  for web users
+     * update expire date of qrcode for mobile users 
      */
     public function QRActivateAttendance () {
         try{
@@ -170,7 +171,8 @@ class AttendanceController {
             if(!$lecture) throw new \Exception('not found' , 6);
 
             $lecture->update([
-                'capture_end_date' => Carbon::now()
+                'capture_end_date' => Carbon::now() ,
+                'expire_date' => Carbon::now()->addHours(env('EXPIRE_DATE' , 1))
             ]);
 
             return $this->SuccessResponse();

@@ -45,8 +45,8 @@ const ResetPasswordPage = () => {
         <form onSubmit={submitHandle} className='contain pt-10 pb-32'>
 
             <div className='mx-auto max-w-96 flex flex-col gap-y-4 my-10'>
-                <InputComp name={'password'} title={'كلمة مرور جديدة'}/>
-                <InputComp name={'confirm'} title={'تأكيد كلمة المرور'}/>
+                <InputComp  required={true} name={'password'} title={'كلمة مرور جديدة'}/>
+                <InputComp  required={true} name={'confirm'} title={'تأكيد كلمة المرور'}/>
             </div>
             
             <div className='w-full center flex-col gap-1'>

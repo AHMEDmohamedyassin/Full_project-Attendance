@@ -28,11 +28,11 @@ const CreateLecturePage = () => {
 
   return (
     <div className='contain'>
-        <form onSubmit={handleSubmit} className='mx-auto max-w-96 flex flex-col gap-y-6 my-10'>
+        <form onSubmit={handleSubmit} className='mx-auto max-w-96 flex flex-col gap-y-6 my-10 mb-32'>
 
-            <InputComp name={'title'} placeholder={'عنوان المحاضرة'} title={'عنوان المحاضرة'} />
+            <InputComp required={true} name={'title'} placeholder={'عنوان المحاضرة'} title={'عنوان المحاضرة'} />
             
-            <div className='flex flex-wrap items-end gap-y-2 gap-x-6'>
+            {/* <div className='flex flex-wrap items-end gap-y-2 gap-x-6'>
 
                 <label className='w-full font-bold text-sm text-gray-500'>عدد الساعات المتاحة للتسجيل</label>
                 <input name='exp_hours' disabled value={hours} type='number' className='mainInput w-24 text-center' />
@@ -40,7 +40,7 @@ const CreateLecturePage = () => {
                     <span onClick={() => setHours(hours + 1)} className="material-symbols-outlined mainButton p-1 py-0 lg:text-3xl text-2xl bg-sky-500 hover:bg-sky-500/80">expand_less</span>
                     <span onClick={() => hours > 1 ? setHours(hours - 1) : null} className="material-symbols-outlined mainButton p-1 py-0 lg:text-3xl text-2xl bg-gray-500 hover:bg-gray-500/80">expand_more</span>
                 </div>
-            </div>
+            </div> */}
             
             <button className='w-fit mx-auto mainButton'>تأكيد</button>
         </form>

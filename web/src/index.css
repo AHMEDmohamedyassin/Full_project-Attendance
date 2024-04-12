@@ -80,3 +80,17 @@ input:focus{
   input[type="number"] {
     -moz-appearance: textfield;
   }
+
+
+/* animation for capture notification */
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.captureAnimation {
+  animation: slide-up 1s ease-out;
+}

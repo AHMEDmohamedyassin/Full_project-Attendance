@@ -41,12 +41,18 @@ const InfoPage = () => {
     <form onSubmit={submitHandle} className='contain'>
         <QrcodeComp/>
 
+        {/* student id */}
+        <div className='w-full center my-6 gap-x-2'>
+          <div className='text-gray-500 font-bold'>الكود : </div>
+          <div className='text-mainBlue font-bold text-xl'>{state.id}</div>
+        </div>
+
         <div className='mainFrom'>
             <InputComp value={state.name} name={'name'} title={'الاسم'}/>
             <InputComp value={state.phone} name={'phone'} title={'رقم الهاتف'}/>
             <InputComp value={state.sec} name={'sec'} title={'الفصل'}/>
             <InputComp value={state.bn} name={'bn'} title={'الرقم'}/>
-            <InputComp value={state.code} name={'code'} title={'الكود'}/>
+            <InputComp value={state.code} name={'code'} title={'الكود الجامعي'}/>
             <InputComp value={state.group} name={'group'} title={'المجموعة'}/>
             <SearchBarComp value={val}/>
         </div>

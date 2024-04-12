@@ -30,16 +30,16 @@ const StudentRegisterPage = () => {
         <form onSubmit={submitHandle} className='contain pt-10 pb-32'>
 
             <div className='mainFrom'>
-                <InputComp name={'name'} title={'الاسم'}/>
-                <InputComp name={'phone'} title={'رقم الهاتف'}/>
-                <InputComp name={'collage_id'} title={'الكلية'}/>
-                <InputComp name={'sec'} title={'الفصل'}/>
-                <InputComp name={'bn'} title={'الرقم'}/>
-                <InputComp name={'group'} title={'المجموعة'}/>
-                <InputComp name={'code'} title={'الكود'}/>
-                <InputComp name={'email'} title={'البريد الإليكتروني'}/>
-                <InputComp name={'password'} title={'كلمة الرور'}/>
-                <InputComp name={'password_confirmation'} title={'تأكيد كلمة المرور'}/>
+                <InputComp required={true} name={'name'} title={'الاسم'}/>
+                <InputComp required={true} name={'phone'} title={'رقم الهاتف'}/>
+                <InputComp required={true} name={'collage_id'} title={'الكلية'}/>
+                <InputComp required={true} name={'sec'} title={'الفصل'}/>
+                <InputComp required={true} name={'bn'} title={'الرقم'}/>
+                <InputComp required={true} name={'group'} title={'المجموعة'}/>
+                <InputComp required={true} name={'code'} title={'الكود'}/>
+                <InputComp required={true} name={'email'} title={'البريد الإليكتروني'}/>
+                <InputComp required={true} type={'password'} name={'password'} title={'كلمة الرور'}/>
+                <InputComp required={true} type={'password'} name={'password_confirmation'} title={'تأكيد كلمة المرور'}/>
             </div>
             
             <div className='w-full center flex-col gap-1'>

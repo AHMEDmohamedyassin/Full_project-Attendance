@@ -44,9 +44,9 @@ const QRCodeScannerComp = (props) => {
 
   return (
     <div style={{ position: "relative" }}>
-      <div id="reader" width="100%" />
+      <div id="reader" className=" aspect-video w-full h-full" />
       
-      <div className="center w-full my-10 gap-4">
+      <div className="absolute bottom-0 center w-full my-10 gap-4">
         {
           camera ? (
             <>
