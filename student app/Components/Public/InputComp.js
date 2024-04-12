@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Text, TextInput, View } from 'react-native'
 
-const InputComp = ({val , title , placeholder , defaultVal , onPress , focusable , autoFocus}) => {
+const InputComp = ({val , title , placeholder , defaultVal , onPress , focusable , autoFocus , password}) => {
   return (
     <View className="flex flex-col w-full gap-1 my-2">
         <Text className="text-xs text-gray-700">{title}</Text>
@@ -13,6 +13,8 @@ const InputComp = ({val , title , placeholder , defaultVal , onPress , focusable
           onPressIn={onPress}
           focusable={focusable}
           autoFocus={autoFocus}
+          textAlign='right'
+          secureTextEntry={password ?? false}
         />
     </View>
   )

@@ -64,8 +64,10 @@ class AttendanceController {
                 'id' => 'required',   // lecture id
                 'qr_code_ids' => 'required|array',
                 'token' => 'required',          // student token
-                'app_token' => 'max:500'
+                'app_token' => 'max:500' ,
+                'app_att_created_at' => 'max:200'
             ]);
+
 
             // finding user
             $user = auth()->setToken(request('token'))->user();
@@ -80,6 +82,10 @@ class AttendanceController {
             // check if student captured the qr_code form app or web
             if(request('app_token') == env('APP_TOKEN') ){
                 $is_mobile = true;
+
+                $diff_in_min = Carbon::parse(request('app_att_created_at'))->diffInRealMinutes(Carbon::parse($lec->updated_at));
+
+                if($diff_in_min > env('GAP_SEND_MINUTES' , 2)) throw new \Exception('attendance expired' , 8);
 
                 // check if lecture has expire date 
                 if(!$lec->expire_date) throw new \Exception('error' , 9);

@@ -29,7 +29,8 @@ const CardComp = ({date , data}) => {
 
 
   const handleSubmit = () => {
-    dispatch(AttendanceAuto(data))
+    // return console.log({...data , app_att_created_at : new Date(date).toUTCString()})
+    dispatch(AttendanceAuto({...data , app_att_created_at : new Date(date).toUTCString()}))
   }
   return (
         <View className="bg-slate-50 flex rounded-xl p-4 w-full my-2">

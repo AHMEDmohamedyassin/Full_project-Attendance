@@ -56,7 +56,7 @@ const CaptureCameraComp = () => {
     }
   return (
     <>
-        <div className='absolute top-0'>{JSON.stringify(data)}</div>
+        {/* <div className='absolute top-0'>{JSON.stringify(data)}</div> */}
         <span onClick={() => setShow(true)} className="material-symbols-outlined text-5xl text-gray-500 font-bold fill button">photo_camera</span>
         {
             show ? 

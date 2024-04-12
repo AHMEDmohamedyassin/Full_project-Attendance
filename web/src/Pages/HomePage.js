@@ -42,7 +42,7 @@ const HomePage = () => {
         {/* card */}
         <div className='center flex-col lg:gap-y-4 gap-y-2'>
           <div className='border-gray-200 border-[1px] rounded-lg shadow-mainShadow overflow-hidden max-w-[200px] lg:max-w-[400px] aspect-square center'>
-            <iframe width="1280" height="720" src="https://www.youtube.com/embed/2tgfQy0VHl0" title="محاضرة الرياضيات الأولي ( الجزء الثاني )" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe width="1280" height="720" src="https://www.youtube.com/embed/gQUs9yCrMNI" title="عاجل | إطلاق عشرات الصواريخ من لبنان باتجاه الجليل" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <a href='' className='text-mainBlue text-lg font-bold'>طريقة الاستخدام للمحاضر</a>
         </div>
@@ -50,7 +50,7 @@ const HomePage = () => {
         {/* card */}
         <div className='center flex-col lg:gap-y-4 gap-y-2'>
           <div className='border-gray-200 border-[1px] rounded-lg shadow-mainShadow overflow-hidden max-w-[200px] lg:max-w-[400px] aspect-square center'>
-            <iframe width="1280" height="720" src="https://www.youtube.com/embed/2tgfQy0VHl0" title="محاضرة الرياضيات الأولي ( الجزء الثاني )" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe width="1280" height="720" src="https://www.youtube.com/embed/gQUs9yCrMNI" title="عاجل | إطلاق عشرات الصواريخ من لبنان باتجاه الجليل" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <a href='' className='text-mainBlue text-lg font-bold'>طريقة الاستخدام للطالب</a>
         </div>

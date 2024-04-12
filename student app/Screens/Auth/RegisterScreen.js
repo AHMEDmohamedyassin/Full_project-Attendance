@@ -35,8 +35,8 @@ const RegisterScreen = ({navigation}) => {
           <InputComp val={e => setData(old => ({...old , code : e}))} placeholder={'9210150'}  title={'الكود'} />
           <InputComp val={e => setData(old => ({...old , group : e}))} placeholder={'A'}  title={'المجموعة'} />
           <InputComp val={e => setData(old => ({...old , email : e}))} placeholder={'ahmedmohamed982025@outlook.com'}  title={'البريد الإليكتروني'} />
-          <InputComp val={e => setData(old => ({...old , password : e}))} placeholder={''}  title={'كلمة المرور'} />
-          <InputComp val={e => setData(old => ({...old , password_confirmation : e}))} placeholder={''}  title={'تأكيد كلمة المرور'} />
+          <InputComp val={e => setData(old => ({...old , password : e}))} placeholder={''}  title={'كلمة المرور'} password={true} />
+          <InputComp val={e => setData(old => ({...old , password_confirmation : e}))} placeholder={''}  title={'تأكيد كلمة المرور'} password={true} />
 
           {
             state.status == 'rl' ? <View className="my-4"><SmallLoadingComp/></View> : 

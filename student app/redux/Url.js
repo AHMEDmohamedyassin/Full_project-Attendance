@@ -1,6 +1,6 @@
 export const APP_URL = 'http://192.168.42.191:8000';
 export const APIv = '/api'
-export const APP_TOKEN = 'ahmed'
+export const APP_TOKEN = 'sImV4cCI6MTcxMjkzMzAxOSwibmJmIjoxNzEyOTI5NDE5LCJqdGkiOiJGYXRzc3d2ZzJlQ2JENTJzIiwic3ViIjoiMTIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In'
 
 
 export const Register_Url = `/auth/register`

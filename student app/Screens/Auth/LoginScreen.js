@@ -26,7 +26,7 @@ const LoginScreen = ({navigation}) => {
         {/* <Text className="text-black font-extrabold text-xl text-mainBlue">تسجيل الدخول</Text> */}
 
           <InputComp val={e => setData(old => ({...old , email : e}))} placeholder={'البريد الإليكتروني'}  title={'البريد الإليكتروني'} />
-          <InputComp val={e => setData(old => ({...old , password : e}))} placeholder={'كلمة المرور'}  title={'كلمة المرور'} />
+          <InputComp val={e => setData(old => ({...old , password : e}))} placeholder={'كلمة المرور'}  title={'كلمة المرور'} password={true} />
 
           {
             state.status == 'll' ? <View className="my-4"><SmallLoadingComp/></View> 
