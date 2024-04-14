@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AttendancePermissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollageController;
@@ -34,3 +35,11 @@ Route::middleware(['Admin'])->group(function () {
     Route::post('/collage/masscreate' , [CollageController::class , 'MassCreateCollage']);
 });
 Route::post('/collage/read' , [CollageController::class , 'ReadCollage']);
+
+
+// attendance permission
+Route::post('/attendance/permission/create' , [AttendancePermissionController::class , 'CreateAtPre']);
+Route::post('/attendance/permission/delete' , [AttendancePermissionController::class , 'DeleteAtPre']);
+Route::post('/attendance/permission/manualattendance' , [AttendancePermissionController::class , 'ManulaAttendanceAtPre']);
+Route::post('/attendance/permission/user/list' , [AttendancePermissionController::class , 'ListPermissionsAtPre']);
+Route::post('/attendance/permission/instructor/list' , [AttendancePermissionController::class , 'ListInstructorPermissionsAtPre']);

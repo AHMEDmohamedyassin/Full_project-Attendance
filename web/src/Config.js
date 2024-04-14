@@ -1,7 +1,7 @@
 export const routes = [
     {loc : '/' , title: 'الرئيسية', nav : true , status : 'public'},
-    {loc : '/about' , title: 'معلومات عنا', nav : true , status : 'public'},
-    {loc : '/contact' , title: 'تواصل معنا', nav : true , status : 'public'},
+    {loc : '/about' , title: 'معلومات عنا', nav : true , status : 'publicOnly'},
+    {loc : '/contact' , title: 'تواصل معنا', nav : true , status : 'publicOnly'},
 
     {loc : '/lectures/instructor' , title: 'المحاضرات', nav : true , status : 'instructor'},
     {loc : '/lecture/create' , title: 'محاضرة جديدة', nav : true , status : 'instructor'},

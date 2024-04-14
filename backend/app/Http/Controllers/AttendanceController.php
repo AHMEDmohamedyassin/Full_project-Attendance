@@ -32,20 +32,7 @@ class AttendanceController {
             // get lecture and check if exists
             $lec = $user->lecture()->find(request('id'));
 
-            if(!$lec) throw new \Exception('lecture not found' , 4);
-
-            // attach users to lecture
-            $attached_ids = [];
-            for($i = 0 ; $i<count(request('users_id')) ; $i ++){
-                $id = request('users_id')[$i];
-                if(!User::find($id)) continue;
-                $lec->attendance()->attach($id);
-                $attached_ids[] = $id;
-            }
-            $data = [];
-            $data['attached_ids'] = $attached_ids;
-            $data['attached_ids_count'] = count($attached_ids);
-            $data['not_attached_ids'] = array_diff(request('users_id') , $attached_ids);
+            $data = $this->ManulaAttendanceHelper($lec , request('users_id'));
 
             return $this->SuccessResponse($data);
         }catch(\Exception $e) {
@@ -53,6 +40,30 @@ class AttendanceController {
         }
     }
     
+
+    /**
+     * Manual Attendance Helper function
+     */
+    public function ManulaAttendanceHelper ($lec , $students_id) {
+        // get lecture and check if exists
+        if(!$lec) throw new \Exception('lecture not found' , 4);
+
+        // attach users to lecture
+        $attached_ids = [];
+        for($i = 0 ; $i<count($students_id) ; $i ++){
+            $id = $students_id[$i];
+            if(!User::find($id)) continue;
+            $lec->attendance()->attach($id);
+            $attached_ids[] = $id;
+        }
+        $data = [];
+        $data['attached_ids'] = $attached_ids;
+        $data['attached_ids_count'] = count($attached_ids);
+        $data['not_attached_ids'] = array_values(array_diff($students_id , $attached_ids));
+
+        return $data;
+    }
+
     
     /**
      * AutoAttendance 

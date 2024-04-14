@@ -3,8 +3,9 @@ import QrcodeComp from '../../Components/Public/QrcodeComp'
 import InputComp from '../../Components/Form/InputComp'
 import { useDispatch, useSelector } from 'react-redux'
 import SearchBarComp from '../../Components/Public/SearchBarComp'
-import { UpdateAuth } from '../../redux/action/AuthAction'
+import { AttPermissionAuth, UpdateAuth } from '../../redux/action/AuthAction'
 import { SmallLoaderComp } from '../../Components/Public/LoaderComp'
+import PermissionsComp from '../../Components/Permissions/PermissionsComp'
 
 const InfoPage = () => {
   const state = useSelector(state => state.Auth)
@@ -38,8 +39,11 @@ const InfoPage = () => {
     }
   } , [state])
   return (
-    <form onSubmit={submitHandle} className='contain'>
-        <QrcodeComp/>
+    <div className='contain'>
+        <div className='flex flex-wrap gap-x-4 justify-center items-center'>
+          <QrcodeComp/>
+          <PermissionsComp/>
+        </div>
 
         {/* student id */}
         <div className='w-full center my-6 gap-x-2'>
@@ -47,25 +51,27 @@ const InfoPage = () => {
           <div className='text-mainBlue font-bold text-xl'>{state.id}</div>
         </div>
 
-        <div className='mainFrom'>
-            <InputComp value={state.name} name={'name'} title={'الاسم'}/>
-            <InputComp value={state.phone} name={'phone'} title={'رقم الهاتف'}/>
-            <InputComp value={state.sec} name={'sec'} title={'الفصل'}/>
-            <InputComp value={state.bn} name={'bn'} title={'الرقم'}/>
-            <InputComp value={state.code} name={'code'} title={'الكود الجامعي'}/>
-            <InputComp value={state.group} name={'group'} title={'المجموعة'}/>
-            <SearchBarComp value={val}/>
-        </div>
-        
-        <div className='w-full center'>
-            {
-              state.status == 'ul' ? 
-                <SmallLoaderComp/>
-                : <button className='mainButton'>تأكيد</button>
-            }
-        </div>
+        <form onSubmit={submitHandle}>
+          <div className='mainFrom'>
+              <InputComp value={state.name} name={'name'} title={'الاسم'}/>
+              <InputComp value={state.phone} name={'phone'} title={'رقم الهاتف'}/>
+              <InputComp value={state.sec} name={'sec'} title={'الفصل'}/>
+              <InputComp value={state.bn} name={'bn'} title={'الرقم'}/>
+              <InputComp value={state.code} name={'code'} title={'الكود الجامعي'}/>
+              <InputComp value={state.group} name={'group'} title={'المجموعة'}/>
+              <SearchBarComp value={val}/>
+          </div>
+          
+          <div className='w-full center'>
+              {
+                state.status == 'ul' ? 
+                  <SmallLoaderComp/>
+                  : <button className='mainButton'>تأكيد</button>
+              }
+          </div>
+        </form>
 
-    </form>
+    </div>
   )
 }
 

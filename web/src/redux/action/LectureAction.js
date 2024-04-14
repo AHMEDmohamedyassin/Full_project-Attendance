@@ -1,6 +1,6 @@
 import {store} from '../store'
 import {fetching} from '../fetch'
-import { AttendanceLecture_Url, AttendanceSubmit_Url, CreateLecture_URL, DeleteLecture_Url, QRActivateLecture_Url, ReadLecture_Url, SearchLecture_Url } from '../Url'
+import { AttendanceLecture_Url, AttendanceSubmit_Url, CreateLecture_URL, DeleteLecture_Url, ManualPermissionAttendance_Url, QRActivateLecture_Url, ReadLecture_Url, SearchLecture_Url } from '../Url'
 import { notify } from '../../Components/Public/notification'
 import * as XLSX from 'xlsx';
 
@@ -135,8 +135,13 @@ export const SubmitAttendanceLecture = (obj) => {
     return async dispatch => {
         dispatch({type:"Lecture_Status" , data : "ml"})
         const token = store.getState().Auth.token
+        const role = store.getState().Auth.role
 
-        const req = await fetching(AttendanceSubmit_Url , {...obj , token})
+        // check if user is student or instructor
+        let url = AttendanceSubmit_Url
+        if(role == 2) url = ManualPermissionAttendance_Url
+
+        const req = await fetching(url , {...obj , token})
         
         
         if(!req.success || !req.res.attached_ids_count){ 

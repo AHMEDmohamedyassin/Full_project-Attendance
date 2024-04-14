@@ -8,6 +8,7 @@ import { LargeLoaderComp, SmallLoaderComp } from '../../Components/Public/Loader
 import CaptureCameraComp from '../../Components/Lectures/CaptureCameraComp';
 import { notify } from '../../Components/Public/notification';
 import ExcelSheetComp from '../../Components/Lectures/ExcelSheetComp';
+import LecturePermissionComp from '../../Components/Permissions/LecturePermissionComp';
 
 const DetailsPage = () => {
     const location = useLocation()
@@ -71,6 +72,7 @@ const DetailsPage = () => {
 
         {/* qrcode part */}
         <div className='flex justify-center items-center flex-wrap gap-4'>
+            <LecturePermissionComp/>
             <LectureQrcodeComp/>
             <CaptureCameraComp />
         </div>

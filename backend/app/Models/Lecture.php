@@ -14,7 +14,6 @@ class Lecture extends Model
         "title" ,
         "qr_file" ,
         "expire_date" ,
-        "student_count" ,
         "capture_end_date" ,
     ];
 
@@ -25,5 +24,9 @@ class Lecture extends Model
 
     public function attendance () {
         return $this->belongsToMany(User::class , 'attendances' , 'lecture_id' , 'user_id')->withTimestamps();
+    }
+
+    public function attendance_permission(){
+        return $this->hasMany(AttendancePermission::class , 'lecture_id' , 'id');
     }
 }

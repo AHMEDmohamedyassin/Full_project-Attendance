@@ -6,6 +6,7 @@ const initial = {
     perPage : 0 ,
     hasMore : true ,
     items:[],
+    lecture_data:{} ,
     attendance : {
         current : 0 ,
         last : 0 ,
@@ -13,7 +14,8 @@ const initial = {
         perPage : 0 ,
         hasMore : true ,
         items : []
-    }
+    },
+    lecture_permission : []
 }
 
 export const LectureReducer = (state = initial , action) => {

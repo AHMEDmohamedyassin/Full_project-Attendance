@@ -30,7 +30,7 @@ const HeaderComp = () => {
   } , [state])
 
   return (
-    <div className='relative bg-mainWhite py-4 border-b-[1px] border-gray-200 shadow-sm'>
+    <div className='z-50 relative bg-mainWhite py-4 border-b-[1px] border-gray-200 shadow-sm'>
         <div className='contain flex items-center justify-between my-0'>
             <Link className='' to={'/'}><span className="material-symbols-outlined">android</span></Link>
 

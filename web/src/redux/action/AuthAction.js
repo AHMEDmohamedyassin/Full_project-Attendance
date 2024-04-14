@@ -1,5 +1,5 @@
 import { notify } from '../../Components/Public/notification'
-import { CollageSearch_Url, ForgetPassword_Url, GetAuthData_Url, Login_Url, Logout_Url, Register_Url, ResetPassword_Url, UpdateAuth_Url } from '../Url'
+import { CollageSearch_Url, ForgetPassword_Url, GetAuthData_Url, Login_Url, Logout_Url, Register_Url, ResetPassword_Url, UpdateAuth_Url, UserPermissions_Url } from '../Url'
 import { fetching } from '../fetch'
 import {store} from '../store'
 
@@ -235,5 +235,31 @@ export const ResetPasswordAuth = (obj) => {
             dispatch({type:"Auth_Status" , data:'ps'})
         else 
             dispatch({type:"Auth_Status" , data:'n'})
+    }
+}
+
+
+/**
+ * get lectures permissions
+ * for student to get attendance instead of instructor
+ */
+export const AttPermissionAuth = (page = 1) => {
+    return async dispatch => {
+        dispatch({type:"Auth_Status" , data:'apl'})
+        const token = store.getState().Auth?.token
+
+        const req = await fetching(UserPermissions_Url , {page, token})
+
+        dispatch({type:"Auth_Status" , data:'n'})
+
+        if(!req.success) return 
+
+        const res = req.res
+        const items = res.items
+
+        dispatch({
+            type : "Auth_Permission" , 
+            data : items
+        })
     }
 }

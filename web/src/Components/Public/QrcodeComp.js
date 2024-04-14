@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
 import { useSelector } from 'react-redux'
 
 const QrcodeComp = () => {
     const state = useSelector(state => state.Auth)
     const [showQr , setShowQr]= useState(false)
+    const [qrTime , setQrTime] = useState(0)
 
     const handleShowQr = () => {
         openFullscreen()
@@ -43,14 +44,22 @@ const QrcodeComp = () => {
         }
       };
 
+      useEffect(() => {
+        setQrTime(old => (new Date).getTime())
+        const interval = setInterval(() => {
+          setQrTime(old => new Date(new Date().toUTCString()).getTime() )
+        } , 5000)
+
+        return () => clearInterval(interval)
+      } , [])
   return (
     <div className='flex justify-center'>
-        <QRCode value={state?.id?.toString()} size={100} onClick={handleShowQr}/>
+        <QRCode value={JSON.stringify({id:state?.id , created:qrTime})} size={100} onClick={handleShowQr}/>
         {
           showQr ? (
             <div onClick={handleHideQr} className='fixed top-0 left-0 bg-white w-full h-full center'>
                 <QRCode 
-                    value={state?.id?.toString()}
+                    value={JSON.stringify({id:state?.id , created:qrTime})}
                     className='w-full h-[95%]'
                 />
             </div>

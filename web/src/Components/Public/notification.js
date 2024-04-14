@@ -7,5 +7,20 @@ export const notify = (msg) => {
 
 
 export const NotifyContainer = () => {
-    return <ToastContainer />
+    return (
+        <div className="w-full">
+            <ToastContainer 
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={true}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+        </div>
+    )
 }

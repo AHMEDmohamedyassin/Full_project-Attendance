@@ -18,7 +18,8 @@ const SearchBarComp = ({value}) => {
   
     // searching
     useEffect(() => {
-      dispatch(CollageAuth({title:search , page:1}))
+      if(search)
+        dispatch(CollageAuth({title:search , page:1}))
     } , [search])
 
     useEffect(() => {
