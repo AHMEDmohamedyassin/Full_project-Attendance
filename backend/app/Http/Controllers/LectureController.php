@@ -133,7 +133,7 @@ class LectureController {
 
             if(!$lecture) throw new \Exception('not found' , 6);
 
-            $attendance = $lecture->attendance()->orderBy('created_at' , 'Desc');
+            $attendance = $lecture->attendance()->orderBy('pivot_created_at' , 'Desc');
 
             if(!request('page')){
                 return $this->SuccessResponse($attendance->get());

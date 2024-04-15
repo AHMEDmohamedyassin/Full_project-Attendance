@@ -19,12 +19,9 @@ const HeaderComp = () => {
 
   useEffect(() => {
     const links = routes.filter(e => {
-      if(state.role && state.role == 1 && e.nav && (e.status == 'public' || e.status == 'instructor')) 
-        return e.nav
-      if(state.role && state.role == 2 && e.nav && (e.status == 'public' || e.status == 'student')) 
-      return e.nav
-      if(!state.role && e.nav && (e.status == 'public' || e.status == 'publicOnly')) 
-        return e.nav
+      if(!state.role) return ['public' , 'publicOnly'].includes(e.nav)
+      if(state.role == 1) return e.nav == 'instructor' 
+      if(state.role == 2) return e.nav == 'student'
     })
     setLinks(links)
   } , [state])

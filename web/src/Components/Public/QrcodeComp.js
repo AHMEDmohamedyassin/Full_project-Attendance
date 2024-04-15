@@ -57,7 +57,7 @@ const QrcodeComp = () => {
         <QRCode value={JSON.stringify({id:state?.id , created:qrTime})} size={100} onClick={handleShowQr}/>
         {
           showQr ? (
-            <div onClick={handleHideQr} className='fixed top-0 left-0 bg-white w-full h-full center'>
+            <div onClick={handleHideQr} className='z-50 fixed top-0 left-0 bg-white w-full h-full center'>
                 <QRCode 
                     value={JSON.stringify({id:state?.id , created:qrTime})}
                     className='w-full h-[95%]'

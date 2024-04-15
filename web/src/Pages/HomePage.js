@@ -18,6 +18,12 @@ const HomePage = () => {
 
           {/* card */}
           <div className='center flex-col gap-1 lg:gap-2'>
+            <span class="material-symbols-outlined text-[100px] lg:text-[200px] text-gray-500">fact_check</span>
+            <h2 className='text-mainBlue text-lg font-bold'>استخدام الصلاحيات</h2>
+          </div>
+          
+          {/* card */}
+          <div className='center flex-col gap-1 lg:gap-2'>
             <span class="material-symbols-outlined text-[100px] lg:text-[200px] text-gray-500">photo_camera</span>
             <h2 className='text-mainBlue text-lg font-bold'>استخدام الكاميرا</h2>
           </div>

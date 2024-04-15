@@ -48,6 +48,9 @@ class AttendancePermissionController extends AttendanceController
                 'expire_date' => $date
             ]);
 
+            if($permission->id)
+                $permission = AttendancePermission::with('user')->find($permission->id);
+
             return $this->SuccessResponse($permission);
         }catch(\Exception $e){
             return $this->ErrorResponse(5001 , $e->getCode() , $e->getMessage());

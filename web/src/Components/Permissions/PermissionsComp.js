@@ -45,7 +45,7 @@ const PermissionsComp = () => {
                                             state.permissions.map((e , key) => (<>
                                                 <div key={key} className='w-full flex justify-between items-center bg-mainWhite rounded p-2 shadow-gray-400 shadow border-gray-300 border-[1px]'>
                                                     <div>{e.lecture?.title}</div>
-                                                    <CaptureCameraComp openFunc={() => handleScan(e.id)}/>
+                                                    <CaptureCameraComp openFunc={() => handleScan(e.lecture_id)}/>
                                                 </div>
                                             </>))
                                         }

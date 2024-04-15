@@ -41,7 +41,7 @@ export const fetching = async (url , data = {} , body = null , headers = null) =
     
         return {success : false , res};
         
-    }catch($e){
+    }catch(e){
         return {success : false , res:{}};
     }
 }

@@ -143,7 +143,6 @@ export const SubmitAttendanceLecture = (obj) => {
 
         const req = await fetching(url , {...obj , token})
         
-        
         if(!req.success || !req.res.attached_ids_count){ 
             notify('لم يتم تسجيل الطلاب')
             return dispatch({type:"Lecture_Status" , data : "mf"}) 
@@ -152,6 +151,9 @@ export const SubmitAttendanceLecture = (obj) => {
         dispatch({type:"Lecture_Status" , data : "ms"})
 
         notify(`تم تسجيل عدد ${req.res.attached_ids_count} طلاب`)
+
+        // stop continue if student
+        if(role == 2) return 
 
         dispatch(AttendanceLecture({
             page : 1 , id : obj.id

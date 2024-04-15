@@ -51,8 +51,9 @@ const CaptureCameraComp = ({openFunc}) => {
         if(state.status == 'mf'){
             dispatch({type:"Lecture_Status" , data : "n"})
         }
-        if(state.status == 'ms'){
+        if(state.status == 'ms' || state.status == 'al'){
             dispatch({type:"Lecture_Status" , data : "n"})
+            setShow(false)
         }
     } , [state.status])
 

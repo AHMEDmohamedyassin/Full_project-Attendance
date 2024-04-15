@@ -40,6 +40,12 @@ const InfoPage = () => {
     <form onSubmit={submitHandle} className='contain'>
         <QrcodeComp/>
 
+        {/* instructor id */}
+        <div className='w-full center my-6 gap-x-2'>
+          <div className='text-gray-500 font-bold'>الكود : </div>
+          <div className='text-mainBlue font-bold text-xl'>{state.id}</div>
+        </div>
+
         <div className='mainFrom'>
             <InputComp name={'name'} value={state.name} title={'الاسم'} required={true}/>
             <InputComp name={'phone'} value={state.phone} title={'رقم الهاتف'} required={true}/>

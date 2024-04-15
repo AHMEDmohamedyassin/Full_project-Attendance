@@ -5,7 +5,8 @@
 
 *{
   font-family: "Cairo", sans-serif;
-  transition: 0.3s
+  transition: 0.3s;
+  list-style: circle;
 }
 
 input:focus{
@@ -27,7 +28,7 @@ input:focus{
     }
 
     .mainButton {
-      @apply border-[1px] border-gray-200 bg-mainBlue text-white px-4 py-1 rounded-lg text-lg font-semibold hover:bg-mainBlue/80;
+      @apply border-[1px] border-gray-200 bg-mainBlue text-white px-4 py-1 rounded-lg lg:text-lg font-semibold hover:bg-mainBlue/80;
       user-select:  none;
     }
 
