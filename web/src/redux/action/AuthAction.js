@@ -17,6 +17,8 @@ export const RegisterAuth = (obj) => {
 
         if(!req.success) return store.dispatch({type:'Auth_Status' , data : 'n'})
 
+        store.dispatch({type:'Auth_Status' , data : 'rs'})
+
         notify('تم إنشاء الحساب')
         
         let res = req.res

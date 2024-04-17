@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const AboutUsPage = () => {
   return (
@@ -42,6 +43,11 @@ const AboutUsPage = () => {
           <div className='text-lg font-bold hover:text-mainBlue text-gray-700 px-10 py-4 bg-mainWhite shadow-mainShadow shadow-lg rounded-lg border-[2px] border-gray-300'>علي ابراهيم</div>
 
         </div>
+      </div>
+
+      {/* logo */}
+      <div className='w-full center mt-20'>
+        <img className='lg:h-96 sm:h-64 h-32' src={'/logo/full_logo.svg'} />
       </div>
     </div>
   )

@@ -19,7 +19,9 @@ const SearchBarComp = ({value}) => {
     // searching
     useEffect(() => {
       if(search)
-        dispatch(CollageAuth({title:search , page:1}))
+        if(search)
+          dispatch(CollageAuth({title:search , page:1}))
+        else setShowInput(false)
     } , [search])
 
     useEffect(() => {
@@ -27,7 +29,7 @@ const SearchBarComp = ({value}) => {
             setVal(value)
     } , [value])
   return (
-            <div className='w-full'>
+            <div className='relative w-full'>
               <div className='w-full flex flex-col gap-y-2'>
                 <label className='font-bold text-sm text-gray-500'>الكلية</label>
                 <input name='search' value={val.id} hidden/>
@@ -40,7 +42,7 @@ const SearchBarComp = ({value}) => {
               </div>
               {
                 search ? 
-                  <div className='w-full border-[1px] border-gray-200 shadow-mainShadow shadow-lg flex flex-col mt-3 rounded-lg'>
+                  <div className='absolute left-0 top-full bg-white  w-full border-[1px] border-gray-200 shadow-mainShadow shadow-lg flex flex-col mt-3 rounded-lg'>
                     {
                       state.status == 'cl' ? 
                         <div className='w-full center'>

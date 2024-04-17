@@ -28,8 +28,10 @@ const HeaderComp = () => {
 
   return (
     <div className='z-50 relative bg-mainWhite py-4 border-b-[1px] border-gray-200 shadow-sm'>
-        <div className='contain flex items-center justify-between my-0'>
-            <Link className='' to={'/'}><span className="material-symbols-outlined">android</span></Link>
+        <div className='relative contain flex items-center justify-between my-0'>
+            <Link className='' to={'/'}>
+              <img className='absolute h-12 bottom-2/4 translate-y-2/4 right-0 left-0' src={'/logo/logo.svg'} />
+            </Link>
 
             {/* nav links */}
             <div className='hidden lg:flex gap-4 font-semibold'>
