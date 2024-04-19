@@ -1,4 +1,5 @@
-export const APP_URL = 'http://192.168.42.191:8000';
+export const PRODUCTION = true ;
+export const APP_URL = 'https://attendedme.com';
 export const APIv = '/api'
 
 

@@ -1,4 +1,4 @@
-import { APIv, APP_URL } from "./Url";
+import { APIv, APP_URL, PRODUCTION } from "./Url";
 import { msgs } from './Msg';
 import { notify } from '../Components/Public/notification';
 import { store } from './store';
@@ -20,7 +20,9 @@ export const fetching = async (url , data = {} , body = null , headers = null) =
             body
         });
     
-        console.log(req)
+        if(!PRODUCTION)
+            console.log(req)
+        
         if(!req.ok){
             notify('حدثت مشكلة ما الرجاء المحاولة لاحقا')
             return {success : false , res : {}}
@@ -37,7 +39,8 @@ export const fetching = async (url , data = {} , body = null , headers = null) =
     
         notify(res.msg_code && msgs[res.msg_code]? msgs[res.msg_code]["ar"] : 'حدث خطأ ما')
     
-        console.log(res)
+        if(!PRODUCTION)
+            console.log(res)
     
         return {success : false , res};
         
