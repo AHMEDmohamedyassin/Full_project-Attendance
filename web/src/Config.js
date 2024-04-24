@@ -1,23 +1,3 @@
-// export const routes = [
-//     {loc : '/' , title: 'الرئيسية', nav : true , status : 'public'},
-//     {loc : '/about' , title: 'معلومات عنا', nav : true , status : 'publicOnly'},
-//     {loc : '/contact' , title: 'تواصل معنا', nav : true , status : 'publicOnly'},
-
-//     {loc : '/lectures/instructor' , title: 'المحاضرات', nav : true , status : 'instructor'},
-//     {loc : '/lecture/create' , title: 'محاضرة جديدة', nav : true , status : 'instructor'},
-//     {loc : '/info/instructor' , title: 'بيانات المحاضر', nav : true , status : 'instructor'},
-    
-//     {loc : '/lectures/student' , title: 'المحاضرات المسجلة', nav : true , status : 'student'},
-//     {loc : '/qr/read' , title: 'إلتقات الكود', nav : true , status : 'student'},
-//     {loc : '/info/student' , title: 'بيانات الطالب', nav : true , status : 'student'},
-
-//     {loc : '/auth/login' , title: 'تسجيل الدخول' , nav: true , status : 'publicOnly'},
-//     {loc : '/auth/forgetpassword' , title: 'استعادة الحساب' , nav: false , status : 'publicOnly'},
-//     {loc : '/auth/resetpassword' , title: 'تغيير كلمة المرور' , nav: false , status : 'publicOnly'},
-//     {loc : '/auth/register/instructor' , title: 'إنشاء حساب محاضر' , nav:false , status : 'publicOnly'},
-//     {loc : '/auth/register/student' , title: 'إنشاء حساب طالب' , nav:false , status : 'publicOnly'},
-// ]
-
 export const routes = [
     {loc : '/' , title: 'الرئيسية', footer : 'public' , nav : 'public'},
     {loc : '/about' , title: 'معلومات عنا', footer : 'public' , nav : 'publicOnly'},
@@ -37,3 +17,11 @@ export const routes = [
     {loc : '/auth/register/instructor' , title: 'إنشاء حساب محاضر' , footer :'publicOnly' , nav : false},
     {loc : '/auth/register/student' , title: 'إنشاء حساب طالب' , footer :'publicOnly' , nav : false},
 ]
+
+
+export const titles = {
+    sec : 'الفصل , section' ,
+    bn : 'الرقم بالفصل , bench' ,
+    id : 'الكود الجامعي , id' ,
+    group : 'المجموعة , group' ,
+}

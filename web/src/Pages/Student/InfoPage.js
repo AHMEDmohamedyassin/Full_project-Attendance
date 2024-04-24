@@ -6,6 +6,7 @@ import SearchBarComp from '../../Components/Public/SearchBarComp'
 import { AttPermissionAuth, UpdateAuth } from '../../redux/action/AuthAction'
 import { SmallLoaderComp } from '../../Components/Public/LoaderComp'
 import PermissionsComp from '../../Components/Permissions/PermissionsComp'
+import {titles} from '../../Config'
 
 const InfoPage = () => {
   const state = useSelector(state => state.Auth)
@@ -55,10 +56,10 @@ const InfoPage = () => {
           <div className='mainFrom'>
               <InputComp value={state.name} name={'name'} title={'الاسم'}/>
               <InputComp value={state.phone} name={'phone'} title={'رقم الهاتف'}/>
-              <InputComp value={state.sec} name={'sec'} title={'الفصل'}/>
-              <InputComp value={state.bn} name={'bn'} title={'الرقم'}/>
-              <InputComp value={state.code} name={'code'} title={'الكود الجامعي'}/>
-              <InputComp value={state.group} name={'group'} title={'المجموعة'}/>
+              <InputComp value={state.sec} name={'sec'} title={titles?.sec}/>
+              <InputComp value={state.bn} name={'bn'} title={titles?.bn}/>
+              <InputComp value={state.code} name={'code'} title={titles?.id}/>
+              <InputComp value={state.group} name={'group'} title={titles?.group}/>
               <SearchBarComp value={val}/>
           </div>
           

@@ -114,7 +114,7 @@ const QrcodeComp = () => {
       } , [showQr])
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center z-40'>
         <QRCode value={`${state.lecture_data?.title}`} size={100} onClick={handleShowQr}/>
         {
           showQr ? (

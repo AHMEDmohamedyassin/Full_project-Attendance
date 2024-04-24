@@ -36,7 +36,7 @@ class ResetPassword extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $url = env('APP_URL') . '/auth/resetpassword?token=' . $this->token . '&email=' . $this->email;
-        return (new MailMessage)->view('Emails.ResetPassword' , ['url' => $url]);
+        return (new MailMessage)->subject('إعادة تعيين كلمة المرور')->view('Emails.ResetPassword' , ['url' => $url]);
     }
 
     /**

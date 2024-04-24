@@ -27,7 +27,7 @@ const HeaderComp = () => {
   } , [state])
 
   return (
-    <div className='z-50 relative bg-mainWhite py-4 border-b-[1px] border-gray-200 shadow-sm'>
+    <div className='z-40 relative bg-mainWhite py-4 border-b-[1px] border-gray-200 shadow-sm'>
         <div className='relative contain flex items-center justify-between my-0'>
             <Link className='' to={'/'}>
               <img className='absolute h-12 bottom-2/4 translate-y-2/4 lg:right-20 right-5 left-0' src={'/logo/logo.svg'} />

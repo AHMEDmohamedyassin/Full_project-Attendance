@@ -9,9 +9,9 @@
         <link rel="apple-touch-icon" href="/logo192.png"/>
         <link rel="manifest" href={{asset("/build/manifest.json")}}/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
-        <title>Attendance</title>
-        <script defer="defer" src={{asset("/build/static/js/".env('REACT_JS').".js")}}></script>
         <link href={{asset("/build/static/css/".env("REACT_CSS").".css")}} rel="stylesheet">
+        <script defer="defer" src={{asset("/build/static/js/".env('REACT_JS').".js")}}></script>
+        <title>Attendedme</title>
     </head>
     <body>
         <div style="display: none">

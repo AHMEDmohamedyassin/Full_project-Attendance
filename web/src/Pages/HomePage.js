@@ -50,7 +50,7 @@ const HomePage = () => {
           <div className='border-gray-200 border-[1px] rounded-lg shadow-mainShadow overflow-hidden max-w-[200px] lg:max-w-[400px] aspect-square center'>
           <iframe width="1280" height="720" src="https://www.youtube.com/embed/gQUs9yCrMNI" title="عاجل | إطلاق عشرات الصواريخ من لبنان باتجاه الجليل" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
-          <a href='' className='text-mainBlue text-lg font-bold'>طريقة الاستخدام للمحاضر</a>
+          <a target='_blank' href='https://www.youtube.com/embed/gQUs9yCrMNI' className='text-mainBlue text-lg font-bold'>طريقة الاستخدام للمحاضر</a>
         </div>
 
         {/* card */}
@@ -58,7 +58,7 @@ const HomePage = () => {
           <div className='border-gray-200 border-[1px] rounded-lg shadow-mainShadow overflow-hidden max-w-[200px] lg:max-w-[400px] aspect-square center'>
           <iframe width="1280" height="720" src="https://www.youtube.com/embed/gQUs9yCrMNI" title="عاجل | إطلاق عشرات الصواريخ من لبنان باتجاه الجليل" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
-          <a href='' className='text-mainBlue text-lg font-bold'>طريقة الاستخدام للطالب</a>
+          <a target='_blank' href='https://www.youtube.com/embed/gQUs9yCrMNI' className='text-mainBlue text-lg font-bold'>طريقة الاستخدام للطالب</a>
         </div>
 
       </div>

@@ -50,7 +50,7 @@ class AuthController {
             // public validation for users 
             $data = request()->validate([
                 'name' => 'required|max:255',
-                'phone' => 'required|regex:/^[0-9]{11}$/',
+                'phone' => 'nullable|regex:/^[0-9]{11}$/',
                 'email' => 'required|email|max:255',
                 'password' => 'required',
                 'password_confirmation' => 'required|same:password',
@@ -63,11 +63,18 @@ class AuthController {
             // more validation for students
             if(request('is_student')){
                 $std = request()->validate([
-                    'bn' => 'required|max:150',
-                    'sec' => 'required|max:100',
-                    'code' => 'required|max:200',
-                    'group' => 'required|max:40'
+                    'bn' => 'max:150|nullable',
+                    'sec' => 'max:100|nullable',
+                    'code' => 'max:200|nullable',
+                    'group' => 'max:40|nullable'
                 ]);
+
+                $std = array_merge([
+                    'bn' => null ,
+                    'sec' => null ,
+                    'code' => null ,
+                    'group' => null ,
+                ] , $std) ;
 
                 $data['json_data'] = json_encode($std);
             }else {
@@ -130,7 +137,7 @@ class AuthController {
             $data = request()->validate([
                 'token' => 'required',
                 'name' => 'max:255',
-                'phone' => 'regex:/^[0-9]{11}$/',
+                'phone' => 'nullable|regex:/^[0-9]{11}$/',
                 'collage_id' => 'max:8',
             ]);
 
@@ -145,12 +152,19 @@ class AuthController {
                     throw new \Exception('can not update before period expiration' , 2);
 
                 $std = request()->validate([
-                    'bn' => 'required|max:150',
-                    'sec' => 'required|max:100',
-                    'code' => 'required|max:200',
-                    'group' => 'required|max:40'
+                    'bn' => 'nullable|max:150',
+                    'sec' => 'nullable|max:100',
+                    'code' => 'nullable|max:200',
+                    'group' => 'nullable|max:40'
                 ]);
 
+                $std = array_merge([
+                    'bn' => null ,
+                    'sec' => null ,
+                    'code' => null ,
+                    'group' => null ,
+                ] , $std) ;
+                
                 $data['json_data'] = json_encode($std);
             }
 
