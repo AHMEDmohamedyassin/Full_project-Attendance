@@ -1,0 +1,12 @@
+email : AttendedMe@hotmail.com
+pass : !Attended_Me.com982025attendancewebsite!
+
+
+Gmail app : 
+name : Attendance
+pass : xald eoyy icpt hjkc 
+
+
+ftp:
+username : Ahmed@attendedme.com
+pass : _the!AttendedMe#Website@FTP$password%
